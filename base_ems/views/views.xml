@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="base_ems.list">
+      <field name="name">base_ems list</field>
+      <field name="model">base_ems.base_ems</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="base_ems.action_window">
+      <field name="name">base_ems window</field>
+      <field name="res_model">base_ems.base_ems</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="base_ems.action_server">
+      <field name="name">base_ems server</field>
+      <field name="model_id" ref="model_base_ems_base_ems"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="base_ems" id="base_ems.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="base_ems.menu_1" parent="base_ems.menu_root"/>
+    <menuitem name="Menu 2" id="base_ems.menu_2" parent="base_ems.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="base_ems.menu_1_list" parent="base_ems.menu_1"
+              action="base_ems.action_window"/>
+    <menuitem name="Server to list" id="base_ems" parent="base_ems.menu_2"
+              action="base_ems.action_server"/>
+    -->
+  </data>
+</odoo>
