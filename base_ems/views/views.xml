@@ -2,6 +2,63 @@
 <odoo>
     <data>
 
+        <menuitem id="menu_ems_root" name="EMS" sequence="10"/>
+        <menuitem id="menu_ems_configuration_categ" name="Configuration" parent="menu_ems_root" sequence="99"/>
+
+        <record id="view_ems_course_form" model="ir.ui.view">
+            <field name="name">view.ems.course.form</field>
+            <field name="model">ems.course</field>
+            <field name="arch" type="xml">
+                <form string="EMS Course Form">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Course Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="sequence"/>
+                            </group>
+                            <group>
+                                <field name="log"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_ems_course_tree" model="ir.ui.view">
+            <field name="name">view.ems.course.tree</field>
+            <field name="model">ems.course</field>
+            <field name="arch" type="xml">
+                <tree string="EMS Course Tree">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_ems_course_view" model="ir.actions.act_window">
+            <field name="name">Course</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ems.course</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Create Courses
+              </p><p>
+                Create your awsome courses!
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_ems_course_view" name="Course" parent="menu_ems_root" action="action_ems_course_view" sequence="1"/>
+
+
+
 
     </data>
 </odoo>
