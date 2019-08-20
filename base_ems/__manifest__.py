@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "base_ems",
+    'name': "Base EMS",
 
-    'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+    'summary': """Base Module for Education Management System""",
 
     'description': """
         Long description of module's purpose
