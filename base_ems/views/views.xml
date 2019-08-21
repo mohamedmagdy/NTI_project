@@ -47,18 +47,197 @@
             <field name="res_model">ems.course</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create Courses
+                </p>
+                <p>
+                    Create your awsome courses!
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_ems_course_view" name="Course" parent="menu_ems_root" action="action_ems_course_view"
+                  sequence="1"/>
+
+        <record id="view_ems_branch_form" model="ir.ui.view">
+            <field name="name">Ems Branches</field>
+            <field name="model">ems.branch</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Branch Name"/>
+                            </h1>
+                        </div>
+                        <group>
+
+
+                            <group>
+                                <field name="sequence"/>
+                                <field name="address"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_ems_branch_tree" model="ir.ui.view">
+            <field name="name">EMS Branches tree</field>
+            <field name="model">ems.branch</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="address"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_ems_branch_view" model="ir.actions.act_window">
+            <field name="name">Branch</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ems.branch</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create Branches
+                </p>
+                <p>
+                    New Branches
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_ems_branch_view" name="Branch" parent="menu_ems_root" action="action_ems_branch_view"
+                  sequence="1"/>
+
+        <record id="view_ems_round_form" model="ir.ui.view">
+            <field name="name">EMS Round Form</field>
+            <field name="model">ems.round.status</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="sequence"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_ems_round_tree" model="ir.ui.view">
+            <field name="name">EMS Round tree</field>
+            <field name="model">ems.round.status</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="sequence"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_ems_round_status_view" model="ir.actions.act_window">
+            <field name="name">EMS Round</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ems.round.status</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+
+                </p>
+                <p>
+
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_ems_round_view" name="Round" parent="menu_ems_root" action="action_ems_round_status_view"
+                  sequence="1"/>
+
+        <record id="view_ems_round_type_form" model="ir.ui.view">
+            <field name="name">view.ems.round.type.form</field>
+            <field name="model">ems.round.types</field>
+            <field name="arch" type="xml">
+                <form string="EMS Round Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="sequence"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_ems_round_type_tree" model="ir.ui.view">
+            <field name="name">view.ems.round.types.tree</field>
+            <field name="model">ems.round.types</field>
+            <field name="arch" type="xml">
+                <tree string="EMS Round Types">
+                    <field name="sequence"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_ems_round_type_view" model="ir.actions.act_window">
+            <field name="name">Round Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ems.round.types</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
               <p class="oe_view_nocontent_create">
-                Create Courses
+                Create new round type
               </p><p>
-                Create your awsome courses!
+
               </p>
             </field>
         </record>
 
-        <menuitem id="menu_ems_course_view" name="Course" parent="menu_ems_root" action="action_ems_course_view" sequence="1"/>
+        <menuitem id="menu_ems_round_type_action_view" name="Round Type" parent="menu_ems_configuration_categ" action="action_ems_round_type_view" sequence="3"/>
 
+        <record id="view_ems_reservation_types_form" model="ir.ui.view">
+            <field name="name">view.ems.reservation.types.form</field>
+            <field name="model">ems.reservation.types</field>
+            <field name="arch" type="xml">
+                <form string="EMS Reservation Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="sequence"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
+        <record id="view_ems_reservation_types_tree" model="ir.ui.view">
+            <field name="name">view.ems.reservation.types.tree</field>
+            <field name="model">ems.reservation.types</field>
+            <field name="arch" type="xml">
+                <tree string="EMS Reservation Types list">
+                    <field name="name"/>
+                    <field name="sequence"/>
+                </tree>
+            </field>
+        </record>
 
+        <record id="action_ems_reservation_types_view" model="ir.actions.act_window">
+            <field name="name">Reservation Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ems.reservation.types</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Reservation Types
+              </p><p>
+                Create new reservation type
+              </p>
+            </field>
+        </record>
 
+        <menuitem id="menu_ems_reservation_type_view" name="Reservation Type" parent="menu_ems_configuration_categ" action="action_ems_reservation_types_view" sequence="9"/>
     </data>
 </odoo>
