@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_ems_course,base_ems.base_ems_course,model_ems_course,,1,1,1,1
+access_ems_branch,base_ems.base_ems_branch,model_ems_branch,,1,1,1,1
