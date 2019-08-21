@@ -1,60 +1,64 @@
+<!-- domain='select_course',
+      domain='select_round_status',
+      domain='select_round_type' -->
+
+
 <odoo>
   <data>
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="reservation.list">
-      <field name="name">reservation list</field>
-      <field name="model">reservation.reservation</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
+    <record id="view_reservation_reservation_form" model="ir.ui.view">
+        <field name="name">view.reservation.reservation.form</field>
+        <field name="model">reservation.reservation</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <sheet>
+                    <group>
+                       <field name="reservation_code"/>
+                        <field name="select_course"/>
+                        <field name="select_round"/>
+                    </group>
+                    <group>
+                        <field name="select_round_status"/>
+                        <field name="select_round_type"/>
+                        <field name="log"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
     </record>
-    -->
-
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="reservation.action_window">
-      <field name="name">reservation window</field>
-      <field name="res_model">reservation.reservation</field>
-      <field name="view_mode">tree,form</field>
+    <record id="view_reservation_reservation_tree" model="ir.ui.view">
+        <field name="name">Reservation</field>
+        <field name="model">reservation.reservation</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name="reservation_code"/>
+            </tree>
+        </field>
     </record>
-    -->
-
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="reservation.action_server">
-      <field name="name">reservation server</field>
-      <field name="model_id" ref="model_reservation_reservation"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
-      </field>
+    <record id="view_reservation_reservation_action" model="ir.actions.act_window">
+        <field name="name">Reservation</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">reservation.reservation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Reservation
+          </p><p>
+            Create reservation for existing course
+          </p>
+        </field>
     </record>
-    -->
 
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="reservation" id="reservation.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="reservation.menu_1" parent="reservation.menu_root"/>
-    <menuitem name="Menu 2" id="reservation.menu_2" parent="reservation.menu_root"/>
-    -->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="reservation.menu_1_list" parent="reservation.menu_1"
-              action="reservation.action_window"/>
-    <menuitem name="Server to list" id="reservation" parent="reservation.menu_2"
-              action="reservation.action_server"/>
-    -->
+
+    <!-- This Menu Item Must have a parent -->
+    <menuitem id="menu_reservation_reservation_categ" name="Reservation" parent="base_ems.menu_ems_root" sequence="20" action="view_reservation_reservation_action"/>
+    <!-- This Menu Item must have a parent and an action -->
+<!--    <menuitem id="menu_reservation_reservation_action" name="Reservation" parent="menu_reservation_reservation_categ" action="view_reservation_reservation_action" sequence="20"/>-->
+
+
+
+
+
+
+
   </data>
 </odoo>
