@@ -13,6 +13,7 @@ class Course(models.Model):
     log = fields.Html(string="Log", )
 
 
+
 class Branch(models.Model):
     _name = 'ems.branch'
     _rec_name = 'name'
