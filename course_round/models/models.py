@@ -10,12 +10,12 @@ class Round(models.Model):
     sequence = fields.Char(string="ID", required=True, )
     course_id = fields.Many2one(comodel_name="ems.course", string="Course ID", required=True, )
     location = fields.Many2one(comodel_name="ems.branch", string="Branch Location", required=True, )
-    round_status = fields.Many2many(comodel_name="ems.round.status", relation="round_round_status_rel",
+    round_status = fields.Many2many(comodel_name="ems.course.round", relation="round_round_status_rel",
                                     column1="round_id", column2="round_status_id", string="Round Status",
                                     required=True)
-    round_type = fields.Many2many(comodel_name="ems.round.types", relation="round_round_types_rel", column1="round_id",
+    round_type = fields.Many2many(comodel_name="ems.course.round", relation="round_round_types_rel", column1="round_id",
                                   column2="round_status_id", string="Round Types", required=True)
-    reservation_type = fields.Many2many(comodel_name="ems.reservation.type", relation="round__reservation_type_rel",
+    reservation_type = fields.Many2many(comodel_name="ems.course.round", relation="round__reservation_type_rel",
                                         column1="round_id", column2="reservation_type_id", string="Reservations",
                                         required=True)
     round_days = fields.Selection(string="Choose Days", selection=[('sat', 'Saturday Only'), ('fri', 'Friday Only'),
