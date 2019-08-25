@@ -4,8 +4,8 @@ import datetime
 
 class Round(models.Model):
     _name = 'ems.course.round'
-    _rec_name = 'name'
-    _description = 'Descripe Course Rounds '
+    _rec_name = 'sequence'
+    _description = 'Describe Course Rounds '
 
     name = fields.Char(string="", required=False, )
     sequence = fields.Char(string="ID", required=False, )
