@@ -1,7 +1,8 @@
 from odoo import models, fields, api
 import datetime
 
-class course_round(models.Model):
+
+class Round(models.Model):
     _name = 'ems.course.round'
     _rec_name = 'name'
     _description = 'Descripe Course Rounds '
