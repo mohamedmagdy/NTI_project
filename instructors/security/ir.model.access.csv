@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ems_course_instructor,instructors_course_instructor,model_ems_course_instructor,,1,1,1,1
