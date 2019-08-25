@@ -23,6 +23,8 @@ class Instructor(models.Model):
     age = fields.Float(string="Age", required=False, )
     address = fields.Char(string="Address", required=False, )
     # TODO: allowed couses M2M with ems.course
-    allowed_branches_ids = fields.Many2many(comodel_name="ems.branch", relation="", column1="", column2="",
     hour_price = fields.Float(string="Hour price", required=False, )
     working_hours = fields.Float(string="Working hours per month", required=False, )
+    allowed_branches_ids = fields.Many2many(comodel_name="ems.branch", relation="instructor_branch_rel",
+                                            column1="instructor_id", column2="branch_id", string="Allowed Branches",
+                                            required=True)
