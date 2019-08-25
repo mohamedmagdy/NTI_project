@@ -19,11 +19,10 @@ class Instructor(models.Model):
                 raise ValueError("The age is invalid")
 
     sequence = fields.Char(string="ID", required=False, )
-    name = fields.Char(string="Instructor Name :", required=True, )
-    age = fields.Float(string="Age :", required=False, )
+    name = fields.Char(string="Instructor Name", required=True, )
+    age = fields.Float(string="Age", required=False, )
     address = fields.Char(string="Address", required=False, )
     # TODO: allowed couses M2M with ems.course
-    hour_price = fields.Float(string="Hour price:", required=False, )
-    working_hours = fields.Float(string="Working hours per month:", required=False, )
     allowed_branches_ids = fields.Many2many(comodel_name="ems.branch", relation="", column1="", column2="",
-                                            string="Allowed Branches", required=True)
+    hour_price = fields.Float(string="Hour price", required=False, )
+    working_hours = fields.Float(string="Working hours per month", required=False, )
