@@ -27,11 +27,11 @@ class Round(models.Model):
     start_date = fields.Date(string="Start Date", required=True, )
     end_date = fields.Date(string="End Date", required=True, )
     round_time = fields.Char(string="Round Time", required=False, )
-    # instructor = fields.One2many(comodel_name="ems.course.instructors.allocation", inverse_name="", string="", required=False, ) #inverse name
-    wf_status = fields.Selection(string="WF",
-                                 selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Started'),
-                                            ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
-    log = fields.Char(string="", required=False, )
+    # instructor = fields.One2many(comodel_name="ems.course.instructors.allocation", inverse_name="", string="",
+    # required=False, ) #inverse name
+    status = fields.Selection(string="Status",
+                              selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Started'),
+                                         ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
     trainee_id = fields.Many2one(comodel_name="res.partner", string="Trainee", required=False, )
     ref = fields.Reference(string="Reference", selection=[('hr.employee', 'Course'),
                                                           ('res.partner', 'Package')])
@@ -41,13 +41,11 @@ class Round(models.Model):
 
         if self.start_date:
             if self.round_days == 'sat' or 'fri':
-                x = (self.sessions_count-1)*7
-                self.end_date = self.start_date + datetime.timedelta(days=x)
-                print(self.end_date)
+                countmethod = (self.sessions_count - 1) * 7
+                self.end_date = self.start_date + datetime.timedelta(days=countmethod)
             else:
-                x = (self.sessions_count - 1) * 3.5
-                self.end_date = self.start_date + datetime.timedelta(days=x)
-                print(self.end_date)
+                countmethod = (self.sessions_count - 1) * 3.5
+                self.end_date = self.start_date + datetime.timedelta(days=countmethod)
 
     _sql_constraints = [
         ('check_count', 'check(sessions_count > 0)', 'sessions count should be MORE THAN ZERO')
