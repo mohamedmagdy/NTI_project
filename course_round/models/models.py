@@ -7,7 +7,6 @@ class Round(models.Model):
     _rec_name = 'sequence'
     _description = 'Describe Course Rounds '
 
-    sequence = fields.Char(string="ID", required=False, )
     sequence = fields.Char(string="ID", required=True, )
     course_id = fields.Many2one(comodel_name="ems.course", string="Course ID", required=True, )
     location = fields.Many2one(comodel_name="ems.branch", string="Branch Location", required=True, )
