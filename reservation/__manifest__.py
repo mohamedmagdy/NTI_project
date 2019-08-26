@@ -3,8 +3,8 @@
     'name': "Course Reservation",
 
     'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
+            Course reservation. Team 1
+        """,
 
     'description': """
         Long description of module's purpose
