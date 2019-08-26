@@ -9,8 +9,9 @@ class Reservation(models.Model):
     _description = 'Course Reservation'
     _inherit = 'mail.thread'
 
-    reservation_code = fields.Char(string="ID", required=True,  track_visibility="onchange")
-    select_course = fields.Many2one(comodel_name="ems.course", string="Select Course/Package Name", required=True,
+    # Initialize Database Fields
+    sequence = fields.Char(string="ID", required=False, )
+    select_course = fields.Many2one(comodel_name="ems.course", string="Select Course/Package", required=True,
                                     track_visibility="onchange")
     select_round = fields.Many2one(comodel_name="ems.course.round", string="Select Round ", required=True,
                                    track_visibility="onchange")
