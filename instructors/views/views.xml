@@ -23,7 +23,7 @@
                             <group>
                                 <field name="age"/>
                                 <field name="address"/>
-                                <field name="allowed_couses_ids"/>
+                                <field name="allowed_courses_ids" widget="many2many_tags"/>
 
                             </group>
                             <group>
@@ -35,6 +35,45 @@
                         </group>
                     </sheet>
                 </form>
+            </field>
+        </record>
+
+        <record id="view_courses_instructor_allocation_form" model="ir.ui.view">
+            <field name="name">Instructor Allocation Form</field>
+            <field name="model">ems.courses.instructors.allocation</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="" class="oe_edit_only"/>
+                            <h1>
+                                <field name="sequence" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="instructor"/>
+                                <field name="round_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="date_time_from"/>
+                                <field name="date_time_to"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_courses_instructor_allocation_tree" model="ir.ui.view">
+            <field name="name">Instructor Allocation Tree</field>
+            <field name="model">ems.courses.instructors.allocation</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="sequence"/>
+                    <field name="round_ids"/>
+                    <field name="date_time_from"/>
+                    <field name="date_time_to"/>
+                </tree>
             </field>
         </record>
 
@@ -65,11 +104,26 @@
                 </p>
             </field>
         </record>
+        <record id="action_courses_instructors_allocation_view" model="ir.actions.act_window">
+            <field name="name">courses instructors allocation</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ems.courses.instructors.allocation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                <!-- Add Text Here -->
+              </p><p>
+                <!-- More details about what a user can do with his object will be OK -->
+              </p>
+            </field>
+        </record>
 
         <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
         <!-- This Menu Item must have a parent and an action -->
         <menuitem id="menuitem_action_instructor" name="Instructors" parent="base_ems.menu_ems_root"
                   action="action_instructor_view" sequence="1"/>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menuitem_courses_instructors_allocation_categ" name="Round allocation" parent="base_ems.menu_ems_root" action="action_courses_instructors_allocation_view" sequence="3"/>
 
 
     </data>
