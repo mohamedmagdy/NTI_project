@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+# FIXME: Delete unused imports
 from datetime import  datetime
 
 
@@ -13,7 +14,9 @@ class Instructor(models.Model):
     @api.multi
     @api.constrains('hour_price', 'working_hours', 'age')
     def check_hours(self):
+        # TODO: You can improve the code readability by using: all()
         if self.working_hours and self.hour_price and self.age:
+            # FIXME: Wrong condition
             if (self.working_hours and self.hour_price) < 0:
                 raise ValueError("The number of hours is invalid")
             if not (25 <= self.age <= 60):
@@ -41,14 +44,14 @@ class InstructorAllocation(models.Model):
         vals['sequence'] = self.env['ir.sequence'].next_by_code('ems.courses.instructors.allocation')
         return super(InstructorAllocation, self).create(vals)
 
-
     @api.multi
     @api.constrains('date_time_from','date_time_to')
     def check_time(self):
         for record in self:
             same_day= record.date_time_from.date()
             next_day= record.date_time_to.date()
-            if not  (same_day == next_day):
+            # FIXME: Fix the experission to be more readable
+            if not (same_day == next_day):
                 raise ValueError('Not the same Day!')
 
     @api.multi
