@@ -23,6 +23,8 @@
                             <group>
                                 <field name="age"/>
                                 <field name="address"/>
+                                <field name="allowed_couses_ids"/>
+
                             </group>
                             <group>
                                 <field name="hour_price"/>
@@ -68,5 +70,7 @@
         <!-- This Menu Item must have a parent and an action -->
         <menuitem id="menuitem_action_instructor" name="Instructors" parent="base_ems.menu_ems_root"
                   action="action_instructor_view" sequence="1"/>
+
+
     </data>
 </odoo>
