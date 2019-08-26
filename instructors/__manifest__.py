@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Course Reservation",
+    'name': "Instructors",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -20,9 +20,11 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'base_ems', 'sale_management'],
+    'depends': ['base','base_ems'],
+
     # always loaded
     'data': [
+        'views/data.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',

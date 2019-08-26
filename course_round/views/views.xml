@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="view_course_round_form" model="ir.ui.view">
+            <field name="name">view.course.round.form</field>
+            <field name="model">ems.course.round</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="sequence"/>
+                            <field name="course_id"/>
+                            <field name="location"/>
+                            <field name="round_status"/>
+                            <field name="round_type"/>
+                            <field name="reservation_type"/>
+                            <field name="round_days"/>
+                            <field name="ref"/>
+                            <field name="trainee_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="round_time"/>
+                            <field name="state"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_course_round_tree" model="ir.ui.view">
+            <field name="name">view.course.round.tree</field>
+            <field name="model">ems.course.round</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="course_id"/>
+                    <field name="location"/>
+                    <field name="round_status"/>
+                    <field name="round_type"/>
+                    <field name="reservation_type"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_course_round_view" model="ir.actions.act_window">
+            <field name="name">Rounds</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ems.course.round</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create
+                </p>
+                <p>
+                    delete
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_course_round_view" name="Rounds" action="action_course_round_view" sequence="1"/>
+
+
+    </data>
+</odoo>
