@@ -1,25 +1,27 @@
 <odoo>
     <data>
+
         <record id="view_reservation_reservation_form" model="ir.ui.view">
             <field name="name">view.reservation.reservation.form</field>
             <field name="model">reservation.reservation</field>
             <field name="arch" type="xml">
-                <form string="Reservation Form">
+                <form string="">
                     <sheet>
                         <group>
-                            <field name="reservation_code"/>
-                            <field name="select_course"/>
-                            <field name="select_round"/>
-                            <field name="round_days"/>
-                            <field name="session_count"/>
-                            <field name="start_date"/>
-                            <field name="end_date"/>
-                            <field name="location"/>
-                            <field name="round_time"/>
-                        </group>
-                        <group>
-                            <field name="select_round_status"/>
-                            <field name="select_round_type"/>
+                            <group>
+                                <field name="select_course"/>
+                                <field name="select_round_status"/>
+                                <field name="select_round_type"/>
+                            </group>
+                            <group>
+                                <field name="select_round"/>
+                                <field name="round_days"/>
+                                <field name="session_count"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                                <field name="location"/>
+                                <field name="round_time"/>
+                            </group>
                         </group>
                     </sheet>
                 </form>
@@ -30,8 +32,8 @@
             <field name="name">Reservation</field>
             <field name="model">reservation.reservation</field>
             <field name="arch" type="xml">
-                <tree string="Reservation Tree">
-                    <field name="reservation_code"/>
+                <tree string="">
+                    <field name="sequence"/>
                 </tree>
             </field>
         </record>
@@ -51,11 +53,10 @@
             </field>
         </record>
 
+
         <!-- This Menu Item Must have a parent -->
         <menuitem id="menu_reservation_reservation_categ" name="Reservation" parent="base_ems.menu_ems_root"
                   sequence="20" action="view_reservation_reservation_action"/>
-        <!-- This Menu Item must have a parent and an action -->
-        <!--    <menuitem id="menu_reservation_reservation_action" name="Reservation" parent="menu_reservation_reservation_categ" action="view_reservation_reservation_action" sequence="20"/>-->
 
     </data>
 </odoo>
