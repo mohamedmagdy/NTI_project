@@ -4,17 +4,22 @@
             <field name="name">view.reservation.reservation.form</field>
             <field name="model">reservation.reservation</field>
             <field name="arch" type="xml">
-                <form string="">
+                <form string="Reservation Form">
                     <sheet>
                         <group>
                             <field name="reservation_code"/>
                             <field name="select_course"/>
                             <field name="select_round"/>
+                            <field name="round_days"/>
+                            <field name="session_count"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="location"/>
+                            <field name="round_time"/>
                         </group>
                         <group>
                             <field name="select_round_status"/>
                             <field name="select_round_type"/>
-                            <field name="log"/>
                         </group>
                     </sheet>
                 </form>
@@ -25,7 +30,7 @@
             <field name="name">Reservation</field>
             <field name="model">reservation.reservation</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <tree string="Reservation Tree">
                     <field name="reservation_code"/>
                 </tree>
             </field>
