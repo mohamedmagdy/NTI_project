@@ -26,8 +26,8 @@ class Round(models.Model):
     start_date = fields.Date(string="Start Date", required=True, default=fields.Date.context_today)
     end_date = fields.Date(string="End Date", required=True, )
     round_time = fields.Char(string="Round Time", required=False, )
-    instructor = fields.One2many(comodel_name="ems.courses.instructors.allocation", inverse_name="instructor",
-                                 required=False, )
+    instructor_ids = fields.Many2many(comodel_name="ems.courses.instructors.allocation", relation="round_instructor_rel",
+                                      column1="instructor_id", column2="round_id", string="Select Instructor", )
     state = fields.Selection(string="Status",
                              selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Started'),
                                         ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
