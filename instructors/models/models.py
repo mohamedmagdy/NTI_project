@@ -51,11 +51,11 @@ class InstructorAllocation(models.Model):
             if not  (same_day == next_day):
                 raise ValueError('Not the same Day!')
 
-    # @api.multi
-    # @api.constrains('date_time_from','date_time_to')
-    # def check_date_validation(self):
-    #     if not (self.date_time_from.date() >= self.round_ids.start_date.date() and self.date_time_to.date() <= self.round_ids.end_date.date()):
-    #         raise ValueError("Time must be between start day and End Day")
+    @api.multi
+    @api.constrains('date_time_from','date_time_to')
+    def check_date_validation(self):
+        if not (self.date_time_from.date() >= self.round_ids.start_date.date() and self.date_time_to.date() <= self.round_ids.end_date.date()):
+            raise ValueError("Time must be between start day and End Day")
 
 
 
@@ -66,7 +66,8 @@ class InstructorAllocation(models.Model):
                                  required=False, )
 
 
-    round_ids = fields.Many2many(comodel_name="ems.course.round", relation="round_instructor_rel", column1="instructor_id", column2="round_id", string="Course Round", )
+    # round_ids = fields.Many2many(comodel_name="ems.course.round", relation="round_instructor_rel", column1="instructor_id", column2="round_id", string="Course Round", )
+    round_ids = fields.Many2one(comodel_name="ems.course.round", string="", required=False, )
     date_time_from = fields.Datetime(string="Date Time From", required=False, )
     date_time_to = fields.Datetime(string="Date Time To", required=False, )
 

@@ -23,28 +23,27 @@ class Round(models.Model):
                                                                    ('sun-wed', 'Sunday-Wednesday'),
                                                                    ('mon-thu', 'Monday-Thursday')], required=True, )
     sessions_count = fields.Integer(string="Sessions Count", required=True, )
-    start_date = fields.Date(string="Start Date", required=True, )
+    start_date = fields.Date(string="Start Date", required=True, default=fields.Date.context_today)
     end_date = fields.Date(string="End Date", required=True, )
     round_time = fields.Char(string="Round Time", required=False, )
-    # instructor = fields.One2many(comodel_name="ems.course.instructors.allocation", inverse_name="", string="",
-    # required=False, ) #inverse name
+    instructor_ids = fields.Many2many(comodel_name="ems.courses.instructors.allocation", relation="round_instructor_rel",
+                                      column1="round_id", column2="instructor_id", string="Select Instructor", )
     state = fields.Selection(string="Status",
-                             selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Started'),
+                             selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Stnarted'),
                                         ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
     trainee_id = fields.Many2one(comodel_name="res.partner", string="Trainee", required=False, )
-    ref = fields.Reference(string="Reference", selection=[('hr.employee', 'Course'),
+    ref = fields.Reference(string="Reference", selection=[('ems.course', 'Course'),
                                                           ('res.partner', 'Package')])
 
-    @api.onchange('start_date', 'round_days', 'sessions_count')
+    @api.onchange('sessions_count', 'start_date', 'round_days')
     def _onchange_end_date(self):
+        if self.round_days in ['sat-tue', 'sun-wed', 'mon-thu']:
+            countmethod = (self.sessions_count - 1) * 3.5
+            self.end_date = self.start_date + datetime.timedelta(days=countmethod)
+        else:
+            countmethod = (self.sessions_count - 1) * 7
+            self.end_date = self.start_date + datetime.timedelta(days=countmethod)
 
-        if self.start_date:
-            if self.round_days == 'sat' or 'fri':
-                countmethod = (self.sessions_count - 1) * 7
-                self.end_date = self.start_date + datetime.timedelta(days=countmethod)
-            else:
-                countmethod = (self.sessions_count - 1) * 3.5
-                self.end_date = self.start_date + datetime.timedelta(days=countmethod)
 
     _sql_constraints = [
         ('check_count', 'check(sessions_count > 0)', 'sessions count should be MORE THAN ZERO')
