@@ -20,11 +20,12 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'base_ems', 'sale_management'],
+    'depends': ['base', 'base_ems', 'mail', ],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',
+        'views/sequence.xml',
         'views/templates.xml',
     ],
     # only loaded in demonstration mode
