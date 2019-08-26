@@ -1,0 +1,12 @@
+<odoo>
+    <data>   
+        <record id="reservation_mod_seq" model="ir.sequence">
+            <field name="name">Reservation Sequence</field>
+            <field name="code">reservation.reservation</field>
+            <field name="prefix">RES-</field>
+            <field name="padding">1</field>
+            <field name="implementation">no_gap</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
