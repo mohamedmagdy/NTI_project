@@ -12,12 +12,14 @@
                             <field name="sequence"/>
                             <field name="course_id"/>
                             <field name="location"/>
+                            <field name="instructor"/>
                             <field name="round_status"/>
                             <field name="round_type"/>
                             <field name="reservation_type"/>
-                            <field name="round_days"/>
                             <field name="ref"/>
                             <field name="trainee_id"/>
+                            <field name="round_days"/>
+                            <field name="sessions_count"/>
                             <field name="start_date"/>
                             <field name="end_date"/>
                             <field name="round_time"/>
