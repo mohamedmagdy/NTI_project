@@ -10,16 +10,16 @@
                         <group>
                             <group>
                                 <field name="select_course"/>
-                                <field name="select_round_status"/>
-                                <field name="select_round_type"/>
+                                <field name="select_round_status_id"/>
+                                <field name="select_round_type_id"/>
                             </group>
                             <group>
-                                <field name="select_round"/>
+                                <field name="select_round_id"/>
                                 <field name="round_days"/>
                                 <field name="session_count"/>
                                 <field name="start_date"/>
                                 <field name="end_date"/>
-                                <field name="location"/>
+                                <field name="location_id"/>
                                 <field name="round_time"/>
                             </group>
                         </group>
