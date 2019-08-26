@@ -5,7 +5,7 @@
             <field name="name">view.reservation.reservation.form</field>
             <field name="model">reservation.reservation</field>
             <field name="arch" type="xml">
-                <form string="">
+                <form string="Reservation Form">
                     <sheet>
                         <group>
                             <group>
@@ -38,7 +38,7 @@
             <field name="name">Reservation</field>
             <field name="model">reservation.reservation</field>
             <field name="arch" type="xml">
-                <tree string="">
+                <tree string="Reservation Tree">
                     <field name="sequence"/>
                 </tree>
             </field>
