@@ -9,6 +9,7 @@ class Reservation(models.Model):
     _description = 'Course Reservation'
     _inherit = 'mail.thread'
 
+    # FIXME: Not-urgent. Please, fix the names of the relational fields
     # Initialize Database Fields
     sequence = fields.Char(string="ID", required=False, )
     select_course = fields.Many2one(comodel_name="ems.course", string="Select Course/Package", required=True,
