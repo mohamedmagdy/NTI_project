@@ -5,8 +5,9 @@ from odoo import models, fields, api
 
 class Reservation(models.Model):
     _name = 'reservation.reservation'
-    _rec_name = 'reservation_code'
-    _description = 'New Description'
+    _rec_name = 'sequence'
+    _description = 'Course Reservation'
+    _inherit = 'mail.thread'
 
     reservation_code = fields.Char(string="ID", required=True,  track_visibility="onchange")
     select_course = fields.Many2one(comodel_name="ems.course", string="Select Course/Package Name", required=True,
