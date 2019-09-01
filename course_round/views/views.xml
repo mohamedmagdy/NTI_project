@@ -54,10 +54,39 @@
             <field name="arch" type="xml">
                 <tree string="">
                     <field name="course_id"/>
-                    <field name="location"/>
-                    <field name="round_status"/>
-                    <field name="round_type"/>
-                    <field name="reservation_type"/>
+                    <field name="location_id"/>
+                    <field name="round_status_ids"/>
+                    <field name="round_type_ids"/>
+                    <field name="reservation_type_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_course_session_form" model="ir.ui.view">
+            <field name="name">view.course.session.form</field>
+            <field name="model">ems.course.session</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <field name="instructor"/>
+                            <field name="session_date"/>
+                            <field name="hours"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_course_session_tree" model="ir.ui.view">
+            <field name="name">view.course.session.tree</field>
+            <field name="model">ems.course.session</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="sequence_s"/>
+                    <field name="instructor"/>
+                    <field name="session_date"/>
+                    <field name="hours"/>
                 </tree>
             </field>
         </record>
