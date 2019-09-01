@@ -5,20 +5,21 @@ import datetime
 class Round(models.Model):
     _name = 'ems.course.round'
     _rec_name = 'sequence'
-    _description = 'Describe Course Rounds '
+    _description = 'Describe Course Rounds'
 
-    sequence = fields.Char(string="ID", required=True, )
-    #TODO: automatic sequence method
+    sequence = fields.Char(string="ID", required=False, default='New', readonly=True)
     course_id = fields.Many2one(comodel_name="ems.course", string="Course ID", required=True, )
     location_id = fields.Many2one(comodel_name="ems.branch", string="Branch Location", required=True, )
     round_status_ids = fields.Many2many(comodel_name="ems.round.status", relation="round_round_status_rel",
-                                    column1="round_id", column2="round_status_id", string="Round Status",
-                                    required=True)
-    round_type_ids = fields.Many2many(comodel_name="ems.round.types", relation="round_round_types_rel", column1="round_id",
-                                  column2="round_status_id", string="Round Types", required=True)
-    reservation_type_ids = fields.Many2many(comodel_name="ems.reservation.types", relation="round__reservation_type_rel",
-                                        column1="round_id", column2="reservation_type_id", string="Reservations",
+                                        column1="round_id", column2="round_status_id", string="Round Status",
                                         required=True)
+    round_type_ids = fields.Many2many(comodel_name="ems.round.types", relation="round_round_types_rel",
+                                      column1="round_id",
+                                      column2="round_status_id", string="Round Types", required=True)
+    reservation_type_ids = fields.Many2many(comodel_name="ems.reservation.types",
+                                            relation="round__reservation_type_rel",
+                                            column1="round_id", column2="reservation_type_id", string="Reservations",
+                                            required=False)
     round_days = fields.Selection(string="Choose Days", selection=[('sat', 'Saturday Only'), ('fri', 'Friday Only'),
                                                                    ('sat-tue', 'Saturday-Tuesday'),
                                                                    ('sun-wed', 'Sunday-Wednesday'),
