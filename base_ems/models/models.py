@@ -47,7 +47,6 @@ class RoundType(models.Model):
     _description = 'EMS Round Type'
 
     name = fields.Char(string='Name', required=True)
-    sequence = fields.Char(string='ID', required=False)
 
 
 class ReservationType(models.Model):
@@ -56,4 +55,3 @@ class ReservationType(models.Model):
     _description = 'EMS Reservation Type'
 
     name = fields.Char(string='Name', required=True)
-    sequence = fields.Char(string='ID', required=False)
