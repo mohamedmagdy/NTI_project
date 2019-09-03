@@ -9,9 +9,12 @@
                     <sheet>
                         <group>
                             <group>
+                                <field name="student_id" domain="[('customer','=','True')]"/>
                                 <field name="select_course"/>
                                 <field name="select_round_status_id"/>
                                 <field name="select_round_type_id"/>
+                                <field name="payment_type"/>
+                                <field name="source_of_knowing"/>
                             </group>
                             <group>
                                 <field name="select_round_id"/>
@@ -19,7 +22,6 @@
                                 <field name="session_count"/>
                                 <field name="start_date"/>
                                 <field name="end_date"/>
-                                <field name="location_id"/>
                                 <field name="round_time"/>
                             </group>
                         </group>
