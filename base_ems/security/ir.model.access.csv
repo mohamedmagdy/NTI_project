@@ -4,3 +4,5 @@ access_ems_branch,base_ems.base_ems_branch,model_ems_branch,,1,1,1,1
 access_ems_round_status,base_ems.base_ems_round_status,model_ems_round_status,,1,1,1,1
 access_ems_round_types,base_ems.base_ems_round_types,model_ems_round_types,,1,1,1,1
 access_ems_reservation_types,base_ems.base_ems_reservation_types,model_ems_reservation_types,,1,1,1,1
+access_ems_days_off,base_ems.base_ems_days_off,model_ems_days_off,,1,1,1,1
+access_ems_branch_labs,base_ems.base_ems_branch_labs,model_ems_branch_labs,,1,1,1,1

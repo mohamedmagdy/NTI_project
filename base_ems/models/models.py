@@ -55,3 +55,28 @@ class ReservationType(models.Model):
     _description = 'EMS Reservation Type'
 
     name = fields.Char(string='Name', required=True)
+
+
+class EMSDaysOff(models.Model):
+    _name = 'ems.days.off'
+    _rec_name = 'name'
+    _description = 'EMS Days Off'
+
+    name = fields.Char(string="Name", required=True, )
+    start_date = fields.Date(string="Start Date", required=True)
+    end_date = fields.Date(string="End Date", required=True)
+    notes = fields.Html(string="Notes", )
+
+
+class EMSBranchLabs(models.Model):
+    _name = 'ems.branch.labs'
+    _rec_name = 'name'
+    _description = 'EMS Branch Labs'
+
+    name = fields.Char(string="Lab Name", required=False, )
+    branch_id = fields.Many2one(comodel_name="ems.branch", string="Branch", required=True, )
+    seats_count = fields.Integer(string="Seats Count", required=True, )
+
+    _sql_constraints = [
+        ('check_positive_seats_count', 'check(default_hours > 0)', "Default hours should be greater than 1."),
+    ]
