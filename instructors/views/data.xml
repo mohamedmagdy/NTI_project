@@ -1,5 +1,5 @@
 <odoo>
-    <data>
+    <data noupdate="1">
 
         <record id="instructor_mod_seq" model="ir.sequence">
             <field name="name">Instructor Sequence</field>

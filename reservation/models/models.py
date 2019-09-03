@@ -3,21 +3,33 @@
 from odoo import models, fields, api
 
 
-class reservation(models.Model):
+class Reservation(models.Model):
     _name = 'reservation.reservation'
-    _rec_name = 'reservation_code'
-    _description = 'New Description'
+    _rec_name = 'sequence'
+    _description = 'Course Reservation'
+    _inherit = 'mail.thread'
 
-    reservation_code = fields.Char(string="ID", required=True, )
-    select_course = fields.Many2one(comodel_name="ems.course", string="Select Course/Package Name", required=True, )
-    select_round = fields.Many2one(comodel_name="ems.course.rounds", string="Select Round ", required=True, )
-    select_round_status = fields.Many2one(comodel_name="ems.round.status", string="Select Round Status",
-                                          required=True, )
-    select_round_type = fields.Many2one(comodel_name="ems.round.types", string="Select Round Type", required=True, )
-    log = fields.Html(string="Log", )
-    # TODO:Round Days  :  related field = round.days
-    # TODO:Sessions Count  :  related field = round.sessions_count
-    # TODO:Start Date :  related field = round.start_date
-    # TODO:End Date :  :  related field = round.end_date
-    # TODO:Location :  related field = round.location
-    # TODO:Round Time : related field = round.location
+    # Initialize Database Fields
+    sequence = fields.Char(string="ID", required=False, )
+    select_course = fields.Many2one(comodel_name="ems.course", string="Select Course/Package", required=True,
+                                    track_visibility="onchange")
+    select_round_id = fields.Many2one(comodel_name="ems.course.round", string="Select Round ", required=True,
+                                   track_visibility="onchange")
+    select_round_status_id = fields.Many2one(comodel_name="ems.round.status", string="Select Round Status",
+                                          required=True, track_visibility="onchange")
+    select_round_type_id = fields.Many2one(comodel_name="ems.round.types", string="Select Round Type", required=True,
+                                        track_visibility="onchange")
+
+    # Initialize Related Fields With ems.course.round Table
+    round_days = fields.Selection(string="Round Days", related="select_round_id.round_days")
+    session_count = fields.Integer(string="Session count", related="select_round_id.sessions_count")
+    start_date = fields.Date(string="Start Date", related="select_round_id.start_date")
+    end_date = fields.Date(string="End Date", related="select_round_id.end_date")
+    location_id = fields.Many2one(string="Location", related="select_round_id.location")
+    round_time = fields.Char(string="Round Time", related="select_round_id.round_time")
+
+    # Create Sequence Function
+    @api.model
+    def create(self, vals):
+        vals['sequence'] = self.env['ir.sequence'].next_by_code('reservation.reservation')
+        return super(Reservation, self).create(vals)
