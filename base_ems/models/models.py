@@ -9,9 +9,17 @@ class Course(models.Model):
     _description = 'EMS Course'
 
     name = fields.Char(string="Course Name", required=True, )
+    default_hours = fields.Integer(string="Default Hours", required=True, )
     sequence = fields.Char(string="ID", required=False, )
     log = fields.Html(string="Log", )
+    is_package = fields.Boolean(string="Package", )
+    child_ids = fields.One2many(comodel_name="ems.course", inverse_name="parent_id", string="Child Courses",
+                                domain=[('is_package', '=', False)] )
+    parent_id = fields.Many2one(comodel_name="ems.course", string="Parent Course", required=False, )
 
+    _sql_constraints = [
+        ('check_positive_default_hours', 'check(default_hours > 1)', "Default hours should be greater than 1.",)
+    ]
 
 
 class Branch(models.Model):
