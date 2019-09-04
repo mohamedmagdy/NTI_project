@@ -68,7 +68,16 @@ class Round(models.Model):
         vals['sequence'] = self.env['ir.sequence'].next_by_code('ems.course.round')
         vals['session_round_ids'] = []
         for i in range(vals['sessions_count']):
-            vals['session_round_ids'].append((0, 0, {'session_date': vals['start_date'], 'hours': vals['session_hours'], 'sequence': 'Sect-'+ str(i+1)}))
+            calc_date = datetime.datetime.strptime(vals['start_date'], '%Y-%m-%d')
+            if vals['round_days'] in ['sat-tue', 'sun-wed', 'mon-thu']:
+                countmethod = (i * 3.5)
+                calc_dates = calc_date + datetime.timedelta(days=countmethod)
+            else:
+                countmethod = (i * 7)
+                calc_dates = calc_date + datetime.timedelta(days=countmethod)
+            vals['session_round_ids'].append((0, 0, {'session_date': calc_dates, 'hours': vals['session_hours'],
+                                                     'sequence': 'Sect-' + str(i + 1),
+                                                     'instructor': vals['trainee_id']}))
 
         return super(Round, self).create(vals)
 
