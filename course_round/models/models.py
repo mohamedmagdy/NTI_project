@@ -20,6 +20,7 @@ class Round(models.Model):
                                                                    ('sat-tue', 'Saturday-Tuesday'),
                                                                    ('sun-wed', 'Sunday-Wednesday'),
                                                                    ('mon-thu', 'Monday-Thursday')], required=True, )
+
     course_hours = fields.Integer(string="Course Hours", required=True, )
     session_hours = fields.Integer(string="Session Hours", required=False, default="1")
     start_date = fields.Date(string="Start Date", required=True, default=fields.Date.context_today)
@@ -29,8 +30,9 @@ class Round(models.Model):
     # instructor_ids = fields.Many2many(comodel_name="ems.courses.instructors.allocation",
     # relation="round_instructor_rel",
     # column1="instructor_id", column2="round_id", string="Select Instructor", )
+
     state = fields.Selection(string="Status",
-                             selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Started'),
+                             selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Stnarted'),
                                         ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
     trainee_id = fields.Many2one(comodel_name="res.partner", string="Trainee", required=False, )
     ref = fields.Reference(string="Reference", selection=[('ems.course', 'Course'),
