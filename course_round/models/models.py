@@ -93,6 +93,7 @@ class Session(models.Model):
     instructor = fields.Selection(string="Instructor",
                                   selection=[('salah', 'Mohamed Salah'), ('essam', 'Mohamed Essam'), ],
                                   required=False, )
+    instructor = fields.Many2one(comodel_name="res.partner", string="Instructor", required=False, )
     hours = fields.Integer(string="Hours", required=False, )
 
 
