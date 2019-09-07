@@ -9,15 +9,18 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="student_id" domain="[('customer','=','True')]"/>
-                                <field name="select_course"/>
-                                <field name="select_round_status_id"/>
-                                <field name="select_round_type_id"/>
+                                <field name="student_id" domain="[('customer','=',True)]"/>
+                                <field name="select_course_id"/>
+                                <field name="reservation_type"/>
+                                <field name="select_round_id" domain="[('course_id','=',select_course_id)]"/>
                                 <field name="payment_type"/>
                                 <field name="source_of_knowing"/>
                             </group>
                             <group>
-                                <field name="select_round_id"/>
+                                <field name="branch_id"/>
+                                <field name="branch_lab_id"/>
+                                <field name="select_round_type_id"/>
+                                <field name="seats"/>
                                 <field name="round_days"/>
                                 <field name="session_count"/>
                                 <field name="start_date"/>

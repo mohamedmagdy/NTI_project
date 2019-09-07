@@ -20,13 +20,15 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'base_ems', 'mail', ],
+    'depends': ['base', 'base_ems', 'mail', 'course_round', 'instructors', ],
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/sequence.xml',
         'views/templates.xml',
+        'views/Course_Report.xml',
+        'views/Course_Report_Details.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
