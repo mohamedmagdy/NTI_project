@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="course_report_id"
+                string='Reservation'
+                model="reservation.reservation"
+                report_type="qweb-pdf"
+                name="reservation.course_report_details_id"
+                file="reservation.course_report_details_id"
+                print_report_name="'Course_Report_Details - %s' % (object.sequence)"
+        />
+    </data>
+</odoo>
