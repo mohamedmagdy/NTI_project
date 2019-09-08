@@ -25,11 +25,11 @@ class Round(models.Model):
     session_hours = fields.Float(string="Session Hours", required=False, default="1")
     start_date = fields.Date(string="Start Date", required=True, default=fields.Date.context_today)
     end_date = fields.Date(string="End Date", required=True, )
-    from_time = fields.Datetime(string="Time From", required=True, default=fields.Datetime.now)
-    to_time = fields.Datetime(string="Until", required=True, )
     # instructor_ids = fields.Many2many(comodel_name="ems.courses.instructors.allocation",
     # relation="round_instructor_rel",
     # column1="instructor_id", column2="round_id", string="Select Instructor", )
+    from_time = fields.Float(string='Time From', required=True, )
+    to_time = fields.Float(string='Until', required=True, )
     state = fields.Selection(string="Status",
                              selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Started'),
                                         ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
@@ -39,6 +39,8 @@ class Round(models.Model):
     session_round_ids = fields.One2many(comodel_name="ems.course.session", inverse_name="round_id",
                                         string="Session", required=False, )
     sessions_count = fields.Integer(string="Session Count", required=False, )
+    day_off_id = fields.Many2one(comodel_name="ems.days.off", string="", required=False, )
+    week_day = fields.Char(string="Start Day", required=False, )
 
     # TODO: log interface
 
