@@ -16,12 +16,13 @@ class Round(models.Model):
                                             relation="round__reservation_type_rel",
                                             column1="round_id", column2="reservation_type_id", string="Reservations",
                                             required=False)
-    round_days = fields.Selection(string="Choose Days", selection=[('sat', 'Saturday Only'), ('fri', 'Friday Only'),
-                                                                   ('sat-tue', 'Saturday-Tuesday'),
-                                                                   ('sun-wed', 'Sunday-Wednesday'),
-                                                                   ('mon-thu', 'Monday-Thursday')], required=True, )
+    round_days = fields.Selection(string="Choose Days",
+                                  selection=[('Saturday', 'Saturday Only'), ('Friday', 'Friday Only'),
+                                             ('Saturday-tue', 'Saturday-Tuesday'),
+                                             ('Sunday', 'Sunday-Wednesday'),
+                                             ('Monday', 'Monday-Thursday')], required=True, )
     course_hours = fields.Integer(string="Course Hours", required=True, )
-    session_hours = fields.Integer(string="Session Hours", required=False, default="1")
+    session_hours = fields.Float(string="Session Hours", required=False, default="1")
     start_date = fields.Date(string="Start Date", required=True, default=fields.Date.context_today)
     end_date = fields.Date(string="End Date", required=True, )
     from_time = fields.Datetime(string="Time From", required=True, default=fields.Datetime.now)
@@ -32,7 +33,7 @@ class Round(models.Model):
     state = fields.Selection(string="Status",
                              selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Started'),
                                         ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
-    trainee_id = fields.Many2one(comodel_name="res.partner", string="Trainee", required=False, )
+    instructor_id = fields.Many2one(comodel_name="ems.course.instructor", string="Instructor", )
     ref = fields.Reference(string="Reference", selection=[('ems.course', 'Course'),
                                                           ('res.partner', 'Package')])
     session_round_ids = fields.One2many(comodel_name="ems.course.session", inverse_name="round_id",
