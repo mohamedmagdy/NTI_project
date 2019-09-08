@@ -44,7 +44,6 @@ class Round(models.Model):
     @api.onchange('session_hours', 'course_hours')
     def _onchange_session_count(self):
         self.sessions_count = self.course_hours / self.session_hours
-        print(self.sessions_count)
 
     @api.onchange('sessions_count', 'start_date', 'round_days')
     def _onchange_end_date(self):
