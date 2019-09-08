@@ -113,11 +113,7 @@ class Session(models.Model):
     round_id = fields.Many2one(comodel_name="ems.course.round", string="Session", required=False, )
     sequence = fields.Char(string="ID", required=False, default='New', readonly=True)
     session_date = fields.Date(string="Session Date", required=False, comodel_name="ems.course.round", rel="start_date")
-    instructor = fields.Selection(string="Instructor",
-                                  selection=[('salah', 'Mohamed Salah'), ('essam', 'Mohamed Essam'), ],
-                                  required=False, )
     instructor = fields.Many2one(comodel_name="res.partner", string="Instructor", required=False, )
     hours = fields.Integer(string="Hours", required=False, )
-
-
-
+    from_time_se = fields.Float(string='From', required=True, )
+    to_time_se = fields.Float(string='To', required=True, )
