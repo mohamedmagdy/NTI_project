@@ -26,15 +26,13 @@ class Round(models.Model):
     session_hours = fields.Float(string="Session Hours", required=False, default="1")
     start_date = fields.Date(string="Start Date", required=True, default=fields.Date.context_today)
     end_date = fields.Date(string="End Date", required=True, )
-    # instructor_ids = fields.Many2many(comodel_name="ems.courses.instructors.allocation",
-    # relation="round_instructor_rel",
-    # column1="instructor_id", column2="round_id", string="Select Instructor", )
     from_time = fields.Float(string='Time From', required=True, )
     to_time = fields.Float(string='Until', required=True, )
     state = fields.Selection(string="Status",
                              selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Started'),
                                         ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
     trainee_id = fields.Many2one(comodel_name="res.partner", string="Trainee", required=False, )
+    instructor_id = fields.Many2one(comodel_name="ems.course.instructor", string="Instructor", )
     ref = fields.Reference(string="Reference", selection=[('ems.course', 'Course'),
                                                           ('res.partner', 'Package')])
     session_round_ids = fields.One2many(comodel_name="ems.course.session", inverse_name="round_id",
