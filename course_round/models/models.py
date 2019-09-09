@@ -48,19 +48,20 @@ class Round(models.Model):
 
     @api.onchange('sessions_count', 'start_date', 'round_days')
     def _onchange_end_date(self):
-        if self.round_days in ['sat-tue', 'sun-wed', 'mon-thu']:
-            countmethod = (self.sessions_count - 1) * 3.5
-            self.end_date = self.start_date + datetime.timedelta(days=countmethod)
+        if self.round_days in ['Saturday-tue', 'Sunday', 'Monday']:
+            count_method = (self.sessions_count - 1) * 3.5
+            self.end_date = self.start_date + datetime.timedelta(days=count_method)
         else:
-            countmethod = (self.sessions_count - 1) * 7
-            self.end_date = self.start_date + datetime.timedelta(days=countmethod)
+            count_method = (self.sessions_count - 1) * 7
+            self.end_date = self.start_date + datetime.timedelta(days=count_method)
 
     @api.onchange('session_hours', 'from_time')
     def _onchange_to_time(self):
-        self.to_time = self.from_time + datetime.timedelta(hours=self.session_hours)
+        self.to_time = self.from_time + self.session_hours
+
 
     _sql_constraints = [
-        ('check_count', 'check(sessions_count > 0)', 'sessions count should be MORE THAN ZERO')
+        ('check_count', 'check(sessions_count > 0)', 'sessions count should be MORE THAN ZERO'),
     ]
 
     @api.model
