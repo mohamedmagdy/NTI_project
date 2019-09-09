@@ -79,6 +79,23 @@ class Round(models.Model):
         ('check_count', 'check(sessions_count > 0)', 'sessions count should be MORE THAN ZERO'),
     ]
 
+    @api.constrains('round_days')
+    def _check_round_days(self):
+        if self.round_days in ['Saturday']:
+            if not self.week_day == 5:
+                raise ValidationError('Start Date Should be Saturday')
+        elif self.round_days == 'Friday':
+            if not self.week_day == 4:
+                raise ValidationError('Start Date Should be Friday')
+        elif self.round_days == 'Sunday':
+            if self.week_day not in [6, 2]:
+                raise ValidationError('Start Date Should be Sunday or Wednesday')
+        elif self.round_days == 'Monday':
+            if self.week_day not in [0, 3]:
+                raise ValidationError('Start Date Should be Monday or Thursday')
+        elif self.round_days in ['Saturday-tue']:
+            if self.week_day not in [5, 1]:
+                raise ValidationError('Start Date Should be Saturday or Tuesday')
     @api.model
     def create(self, vals):
         vals['sequence'] = self.env['ir.sequence'].next_by_code('ems.course.round')
