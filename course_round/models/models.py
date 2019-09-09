@@ -44,10 +44,12 @@ class Round(models.Model):
 
     @api.onchange('session_hours', 'course_hours')
     def _onchange_session_count(self):
+        # method to calculate number of sessions
         self.sessions_count = self.course_hours / self.session_hours
 
     @api.onchange('sessions_count', 'start_date', 'round_days')
     def _onchange_end_date(self):
+        # method to calculate end date
         if self.round_days in ['Saturday-tue', 'Sunday', 'Monday']:
             count_method = (self.sessions_count - 1) * 3.5
             self.end_date = self.start_date + datetime.timedelta(days=count_method)
@@ -57,20 +59,24 @@ class Round(models.Model):
 
     @api.onchange('session_hours', 'from_time')
     def _onchange_to_time(self):
+        # method to calculate session end time
         self.to_time = self.from_time + self.session_hours
 
     @api.onchange('start_date', 'week_day')
     def _get_week_day(self):
+        # method to get what day is it in start date
         self.week_day = self.start_date.weekday()
 
     @api.onchange('branch_id')
     def _lab_by_branch_id(self):
+        # method to show only labs related to a specific branch
         return {
             'domain': {'lab_id': [('branch_id', '=', self.branch_id.id)]},
         }
 
     @api.onchange('course_id')
     def _get_course_hours(self):
+        # method to get the default hours per course
         return {
             'value': {'course_hours': self.course_id.default_hours},
         }
@@ -81,6 +87,7 @@ class Round(models.Model):
 
     @api.constrains('round_days')
     def _check_round_days(self):
+        # constrains on start_date
         if self.round_days in ['Saturday']:
             if not self.week_day == 5:
                 raise ValidationError('Start Date Should be Saturday')
