@@ -31,7 +31,6 @@ class Round(models.Model):
     state = fields.Selection(string="Status",
                              selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Started'),
                                         ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
-    trainee_id = fields.Many2one(comodel_name="res.partner", string="Trainee", required=False, )
     instructor_id = fields.Many2one(comodel_name="ems.course.instructor", string="Instructor", )
     ref = fields.Reference(string="Reference", selection=[('ems.course', 'Course'),
                                                           ('res.partner', 'Package')])
@@ -44,7 +43,6 @@ class Round(models.Model):
     @api.onchange('session_hours', 'course_hours')
     def _onchange_session_count(self):
         self.sessions_count = self.course_hours / self.session_hours
-        print(self.sessions_count)
 
     @api.onchange('sessions_count', 'start_date', 'round_days')
     def _onchange_end_date(self):
