@@ -59,6 +59,21 @@ class Round(models.Model):
     def _onchange_to_time(self):
         self.to_time = self.from_time + self.session_hours
 
+    @api.onchange('start_date', 'week_day')
+    def _get_week_day(self):
+        self.week_day = self.start_date.weekday()
+
+    @api.onchange('branch_id')
+    def _lab_by_branch_id(self):
+        return {
+            'domain': {'lab_id': [('branch_id', '=', self.branch_id.id)]},
+        }
+
+    @api.onchange('course_id')
+    def _get_course_hours(self):
+        return {
+            'value': {'course_hours': self.course_id.default_hours},
+        }
 
     _sql_constraints = [
         ('check_count', 'check(sessions_count > 0)', 'sessions count should be MORE THAN ZERO'),
