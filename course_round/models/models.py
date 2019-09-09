@@ -163,6 +163,5 @@ class Session(models.Model):
     session_date = fields.Date(string="Session Date", required=False, comodel_name="ems.course.round", rel="start_date")
     session_instructor_id = fields.Many2one(comodel_name="ems.course.instructor", string="Instructor", required=False, )
     hours = fields.Integer(string="Hours", required=False, )
-
-
-
+    from_time_se = fields.Float(string='From', required=True, )
+    to_time_se = fields.Float(string='To', required=True, )
