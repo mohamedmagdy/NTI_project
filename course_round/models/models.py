@@ -37,6 +37,8 @@ class Round(models.Model):
     session_round_ids = fields.One2many(comodel_name="ems.course.session", inverse_name="round_id",
                                         string="Session", required=False, )
     sessions_count = fields.Integer(string="Session Count", required=False, )
+    day_off_id = fields.Many2one(comodel_name="ems.days.off", string="", required=False, )
+    week_day = fields.Integer(string="Start Day", required=False, )
 
     # TODO: log interface
 
