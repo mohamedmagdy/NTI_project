@@ -13,9 +13,8 @@ class Course(models.Model):
     sequence = fields.Char(string="ID", required=False, )
     log = fields.Html(string="Log", )
     is_package = fields.Boolean(string="Package", )
-    child_ids = fields.One2many(comodel_name="ems.course", inverse_name="parent_id", string="Child Courses",
-                                domain=[('is_package', '=', False)] )
-    parent_id = fields.Many2one(comodel_name="ems.course", string="Parent Course", required=False, )
+    child_ids = fields.Many2many(comodel_name="ems.course", relation="course_package_rel", column1="course_id",
+                                 column2="child_ids", string="Child Courses", domain=[('is_package', '=', False)])
 
     _sql_constraints = [
         ('check_positive_default_hours', 'check(default_hours > 1)', "Default hours should be greater than 1.",)
