@@ -80,7 +80,7 @@
                         </div>
                         <group>
                             <field name="session_date"/>
-                            <field name="instructor"/>
+                            <field name="session_instructor_id"/>
                             <field name="hours"/>
                             <field name="from_time_se"/>
                             <field name="to_time_se"/>
@@ -97,7 +97,7 @@
                 <tree string="">
                     <field name="sequence"/>
                     <field name="session_date"/>
-                    <field name="instructor"/>
+                    <field name="session_instructor_id"/>
                     <field name="hours"/>
                     <field name="from_time_se"/>
                     <field name="to_time_se"/>
@@ -112,10 +112,9 @@
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                    Create
+                    Create A New Round
                 </p>
                 <p>
-                    delete
                 </p>
             </field>
         </record>
