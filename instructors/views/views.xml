@@ -22,12 +22,12 @@
             <field name="arch" type="xml">
                 <form string="Instructor">
                     <sheet>
-                        <div class="oe_button_box" name="button_box">
-                            <button name="%(action_instructor_availability)d" type="action" class="oe_stat_button"
-                                    icon="fa-star-half-empty">
-                                <field name="count" string="available" widget="statinfo"/>
-                            </button>
-                        </div>
+<!--                        <div class="oe_button_box" name="button_box">-->
+<!--                            <button name="%(action_instructor_availability)d" type="action" class="oe_stat_button"-->
+<!--                                    icon="fa-star-half-empty">-->
+<!--                                <field name="count" string="available" widget="statinfo"/>-->
+<!--                            </button>-->
+<!--                        </div>-->
                         <div class="oe_title">
                             <label for="" class="oe_edit_only"/>
                             <h1>
