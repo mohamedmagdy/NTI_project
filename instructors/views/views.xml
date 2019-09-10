@@ -1,20 +1,6 @@
 <odoo>
     <data>
 
-<!--        <record id="action_instructor_availability" model="ir.actions.act_window">-->
-<!--            <field name="name">instructor availability</field>-->
-<!--            <field name="type">ir.actions.act_window</field>-->
-<!--            <field name="res_model">instructor.availability</field>-->
-<!--            <field name="view_mode">tree,form</field>-->
-<!--            <field name="help" type="html">-->
-<!--                <p class="oe_view_nocontent_create">-->
-<!--                    &lt;!&ndash; Add Text Here &ndash;&gt;-->
-<!--                </p>-->
-<!--                <p>-->
-<!--                    &lt;!&ndash; More details about what a user can do with this object will be OK &ndash;&gt;-->
-<!--                </p>-->
-<!--            </field>-->
-<!--        </record>-->
 
         <record id="view_instructor_form" model="ir.ui.view">
             <field name="name">ems instructor</field>
@@ -22,12 +8,7 @@
             <field name="arch" type="xml">
                 <form string="Instructor">
                     <sheet>
-<!--                        <div class="oe_button_box" name="button_box">-->
-<!--                            <button name="%(action_instructor_availability)d" type="action" class="oe_stat_button"-->
-<!--                                    icon="fa-star-half-empty">-->
-<!--                                <field name="count" string="available" widget="statinfo"/>-->
-<!--                            </button>-->
-<!--                        </div>-->
+
                         <div class="oe_title">
                             <label for="" class="oe_edit_only"/>
                             <h1>

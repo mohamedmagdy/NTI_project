@@ -35,10 +35,10 @@ class Instructor(models.Model):
             if not (25 <= self.age <= 60):
                 raise ValueError("The age is invalid")
 
-    def _check_instructor(self):
-        self.count = self.env['instructor.availability'].search_count([('instructor_name_ids','in',self.id)])
-
-    count = fields.Integer(string="", required=False, compute=_check_instructor)
+    # def _check_instructor(self):
+    #     self.count = self.env['instructor.availability'].search_count([('instructor_name_ids','in',self.id)])
+    #
+    # count = fields.Integer(string="", required=False, compute=_check_instructor)
 
     sequence = fields.Char(string="ID", required=False, )
     name = fields.Char(string="Instructor Name", required=True, )
@@ -51,7 +51,7 @@ class Instructor(models.Model):
     allowed_branches_ids = fields.Many2many(comodel_name="ems.branch", relation="instructor_branch_rel",
                                             column1="instructor_id", column2="branch_id", string="Allowed Branches",
                                             required=True)
-    instructor_id = fields.Many2one(comodel_name="instructor.availability", string="Instructor", required=False, )
+    # instructor_id = fields.Many2one(comodel_name="instructor.availability", string="Instructor", required=False, )
     # month = fields.Selection(string="", selection=[('1', 'Janurary'), ('2', 'Feburary'),('3', 'March'),
     #                                                ('4', 'April'),('5', 'May'),('6', 'June'),
     #                                                ('7', 'July'),('8', 'August'),('9', 'September'),
