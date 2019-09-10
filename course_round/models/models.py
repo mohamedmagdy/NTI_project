@@ -39,6 +39,20 @@ class Round(models.Model):
     sessions_count = fields.Integer(string="Session Count", required=False, )
     day_off_id = fields.Many2one(comodel_name="ems.days.off", string="", required=False, )
     week_day = fields.Integer(string="Start Day", required=False, )
+    sub_course_ids = fields.Many2many(comodel_name="ems.course", relation="round_sub_course_rel", column1="round_id",
+                                      column2="sub_course_id", string="Sub Courses", )
+
+    @api.multi
+    def write(self, values):
+        if 'course_id' in values and values.get('course_id'):
+            course_obj = self.env['ems.course'].browse(values.get('course_id'))
+            if course_obj.is_package and course_obj.child_ids:
+                course_ids = [course.id for course in course_obj.child_ids]
+                values['sub_course_ids'] = [(6, 0, course_ids)]
+            else:
+                if self.sub_course_ids:
+                    values['sub_course_ids'] = [(5, None, None)]
+        return super(Round, self).write(values)
 
     # TODO: log interface
 
