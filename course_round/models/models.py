@@ -89,6 +89,24 @@ class Round(models.Model):
         }
 
     @api.onchange('course_id')
+    def _lab_by_course_id(self):
+        # method to show only instructors related to a specific course
+        return {
+            'domain': {'instructor_id': [('allowed_courses_ids', '=', self.course_id.id)]},
+        }
+
+    @api.onchange('course_type')
+    def _lab_by_course_type(self):
+        if self.course_type == 'Course':
+            return {
+                'domain': {'course_id': [('is_package', '=', False)]},
+            }
+        else:
+            return {
+                'domain': {'course_id': [('is_package', '=', True)]},
+            }
+
+    @api.onchange('course_id')
     def _get_course_hours(self):
         # method to get the default hours per course
         return {
