@@ -7,14 +7,15 @@ from calendar import monthrange
 class Instructor(models.Model):
     _name = 'ems.course.instructor'
 
-    @api.onchange('month')
-    def _get_month(self):
-        today = datetime.today()
-        current_month=(monthrange(today.year,int(self.month))[1])
-        first_day= datetime(today.year,int(self.month),1)
-        last_day= datetime(today.year,int(self.month),current_month)
-        session_month =self.env['ems.course.session'].search([('session_date', '>=', first_day), ('session_date', '<=', last_day)])
-        self.no_of_session_date=len(session_month)
+    # @api.onchange('month')
+    # def _get_month(self):
+    #     today = datetime.today()
+    #     current_month=(monthrange(today.year,int(self.month))[1])
+    #     first_day= datetime(today.year,int(self.month),1)
+    #     last_day= datetime(today.year,int(self.month),current_month)
+    #     session_month =self.env['ems.course.session'].search([('session_date', '>=', first_day), ('session_date', '<=', last_day)])
+    #     instructor_session = self.env['ems.course.round'].search(('instructor_', '=', first_day))
+    #     self.no_of_session_date=len(session_month)
 
 
 
@@ -51,13 +52,13 @@ class Instructor(models.Model):
                                             column1="instructor_id", column2="branch_id", string="Allowed Branches",
                                             required=True)
     instructor_id = fields.Many2one(comodel_name="instructor.availability", string="Instructor", required=False, )
-    month = fields.Selection(string="", selection=[('1', 'Janurary'), ('2', 'Feburary'),('3', 'March'),
-                                                   ('4', 'April'),('5', 'May'),('6', 'June'),
-                                                   ('7', 'July'),('8', 'August'),('9', 'September'),
-                                                   ('10', 'October'),('11', 'November'),('12', 'December') ], default='1')
-    # todo
-    # assigned_hours_ids = fields.One2many(comodel_name="ems.course.session", inverse_name="", string="", required=False, )
-    no_of_session_date= fields.Integer(string="Number Of Session Date", required=False, compute=_get_month )
+    # month = fields.Selection(string="", selection=[('1', 'Janurary'), ('2', 'Feburary'),('3', 'March'),
+    #                                                ('4', 'April'),('5', 'May'),('6', 'June'),
+    #                                                ('7', 'July'),('8', 'August'),('9', 'September'),
+    #                                                ('10', 'October'),('11', 'November'),('12', 'December') ], default='1')
+    # # todo
+    # # assigned_hours_ids = fields.One2many(comodel_name="ems.course.session", inverse_name="", string="", required=False, )
+    # no_of_session_date= fields.Integer(string="Number Of Session Date", required=False, compute=_get_month )
 
 
 
@@ -102,18 +103,18 @@ class Instructor(models.Model):
 #
 #     # TODO: constraints
 
-
-class Instructor_Availability(models.Model):
-    _name = 'instructor.availability'
-
-
-    instructor_name_ids = fields.One2many(comodel_name="ems.course.instructor", inverse_name="instructor_id", string="Instructor Name", required=False, )
-    course_ids = fields.Many2many(comodel_name="ems.course", relation="", column1="", column2="", string="", )
-    start_date = fields.Date(string="Start Date", required=False, )
-    end_date = fields.Date(string="End Date", required=False, )
-    hour_from = fields.Float(string="",  required=False, )
-    hour_to = fields.Float(string="",  required=False, )
-
+#
+# class Instructor_Availability(models.Model):
+#     _name = 'instructor.availability'
+#
+#
+#     instructor_name_ids = fields.One2many(comodel_name="ems.course.instructor", inverse_name="instructor_id", string="Instructor Name", required=False, )
+#     course_ids = fields.Many2many(comodel_name="ems.course", relation="", column1="", column2="", string="", )
+#     start_date = fields.Date(string="Start Date", required=False, )
+#     end_date = fields.Date(string="End Date", required=False, )
+#     hour_from = fields.Float(string="",  required=False, )
+#     hour_to = fields.Float(string="",  required=False, )
+#
 
 
 
