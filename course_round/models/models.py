@@ -29,7 +29,7 @@ class Round(models.Model):
     from_time = fields.Float(string='Time From', required=True, )
     to_time = fields.Float(string='Until', required=True, )
     state = fields.Selection(string="Status",
-                             selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Stnarted'),
+                             selection=[('tentative', 'Tentative'), ('confirm', 'Confirmed'), ('start', 'Started'),
                                         ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
     instructor_id = fields.Many2one(comodel_name="ems.course.instructor", string="Instructor", )
     ref = fields.Reference(string="Reference", selection=[('ems.course', 'Course'),
