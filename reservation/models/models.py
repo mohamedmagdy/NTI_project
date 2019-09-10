@@ -33,7 +33,7 @@ class Reservation(models.Model):
                                    track_visibility="onchange", )
     start_date = fields.Date(string="Start Date", related="select_round_id.start_date", track_visibility="onchange", )
     end_date = fields.Date(string="End Date", related="select_round_id.end_date", track_visibility="onchange", )
-    round_time = fields.Datetime(string="Round Time", related="select_round_id.from_time",
+    round_time = fields.Float(string="Round Time", related="select_round_id.from_time",
                                  track_visibility="onchange", )
     student_id = fields.Many2one(comodel_name="res.partner", string="Student", required=True,
                                  track_visibility="onchange", )
