@@ -32,8 +32,8 @@ class Round(models.Model):
                              selection=[('tentative', 'Tentative'), ('confirm', 'Confirmed'), ('start', 'Started'),
                                         ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
     instructor_id = fields.Many2one(comodel_name="ems.course.instructor", string="Instructor", )
-    ref = fields.Reference(string="Reference", selection=[('ems.course', 'Course'),
-                                                          ('res.partner', 'Package')])
+    course_type = fields.Selection(string="Course Type", selection=[('Course', 'Course'), ('Package', 'Package'), ],
+                                   required=True, default="Course", )
     session_round_ids = fields.One2many(comodel_name="ems.course.session", inverse_name="round_id",
                                         string="Session", required=False, )
     sessions_count = fields.Integer(string="Session Count", required=False, )
