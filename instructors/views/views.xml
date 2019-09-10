@@ -1,20 +1,20 @@
 <odoo>
     <data>
 
-        <record id="action_instructor_availability" model="ir.actions.act_window">
-            <field name="name">instructor availability</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">instructor.availability</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                    <!-- Add Text Here -->
-                </p>
-                <p>
-                    <!-- More details about what a user can do with this object will be OK -->
-                </p>
-            </field>
-        </record>
+<!--        <record id="action_instructor_availability" model="ir.actions.act_window">-->
+<!--            <field name="name">instructor availability</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">instructor.availability</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="oe_view_nocontent_create">-->
+<!--                    &lt;!&ndash; Add Text Here &ndash;&gt;-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    &lt;!&ndash; More details about what a user can do with this object will be OK &ndash;&gt;-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <record id="view_instructor_form" model="ir.ui.view">
             <field name="name">ems instructor</field>
@@ -55,14 +55,14 @@
                                        options="{'no_create':True,'no_open':True}"/>
                             </group>
                         </group>
-                        <notebook>
-                            <page string="Free Hours">
-                                <group>
-                                    <field name="month"/>
-                                    <field name="no_of_session_date"/>
-                                </group>
-                            </page>
-                        </notebook>
+<!--                        <notebook>-->
+<!--                            <page string="Free Hours">-->
+<!--                                <group>-->
+<!--                                    <field name="month"/>-->
+<!--                                    <field name="no_of_session_date"/>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
                     </sheet>
                 </form>
             </field>
@@ -96,34 +96,34 @@
 <!--            </field>-->
 <!--        </record>-->
 
-        <record id="view_instructor_availability_form" model="ir.ui.view">
-            <field name="name">Instructor Availability</field>
-            <field name="model">instructor.availability</field>
-            <field name="arch" type="xml">
-                <form string="">
-                    <sheet>
-                        <group>
-                            <group>
-                                <field name="instructor_name_ids">
-                                    <tree>
-                                        <field name="name"/>
-                                        <field name="working_hours"/>
-                                    </tree>
-                                </field>
+<!--        <record id="view_instructor_availability_form" model="ir.ui.view">-->
+<!--            <field name="name">Instructor Availability</field>-->
+<!--            <field name="model">instructor.availability</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="">-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="instructor_name_ids">-->
+<!--                                    <tree>-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="working_hours"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
 
-                                <field name="course_ids" widget="many2many_tags"/>
-                            </group>
-                            <group>
-                                <field name="start_date"/>
-                                <field name="end_date"/>
-                                <field name="hour_from"/>
-                                <field name="hour_to"/>
-                            </group>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+<!--                                <field name="course_ids" widget="many2many_tags"/>-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                                <field name="start_date"/>-->
+<!--                                <field name="end_date"/>-->
+<!--                                <field name="hour_from"/>-->
+<!--                                <field name="hour_to"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!--        <record id="view_instructor_availability_tree" model="ir.ui.view">-->
         <!--            <field name="name">Instructor Availability</field>-->
@@ -191,20 +191,20 @@
 <!--            </field>-->
 <!--        </record>-->
 
-        <record id="view_instructor_availability_action" model="ir.actions.act_window">
-            <field name="name">Instructor Availability</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">instructor.availability</field>
-            <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                    <!-- Add Text Here -->
-                </p>
-                <p>
-                    <!-- More details about what a user can do with this object will be OK -->
-                </p>
-            </field>
-        </record>
+<!--        <record id="view_instructor_availability_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Instructor Availability</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">instructor.availability</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="oe_view_nocontent_create">-->
+<!--                    &lt;!&ndash; Add Text Here &ndash;&gt;-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    &lt;!&ndash; More details about what a user can do with this object will be OK &ndash;&gt;-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
         <!-- This Menu Item must have a parent and an action -->
@@ -214,8 +214,8 @@
 <!--        <menuitem id="menuitem_courses_instructors_allocation_categ" name="Round allocation"-->
 <!--                  parent="base_ems.menu_ems_root" action="action_courses_instructors_allocation_view" sequence="3"/>-->
         <!-- This Menu Item must have a parent and an action -->
-        <menuitem id="menuitem_instructor_availability_action" name="avaliability" parent="base_ems.menu_ems_root"
-                  action="view_instructor_availability_action" sequence="6"/>
+<!--        <menuitem id="menuitem_instructor_availability_action" name="avaliability" parent="base_ems.menu_ems_root"-->
+<!--                  action="view_instructor_availability_action" sequence="6"/>-->
 
 
     </data>
