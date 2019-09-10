@@ -181,7 +181,6 @@ class Round(models.Model):
                         vals['end_date'] = calc_dates
                         calc_dates = calc_date + datetime.timedelta(days=count_method)
                         session_number = session_number + 1
-                        print('o ', o, 'days_off ', len(days_off), 'x ', x, 'i ', i)
             x = x + 1
         return super(Round, self).create(vals)
 
