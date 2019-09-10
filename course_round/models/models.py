@@ -143,7 +143,7 @@ class Round(models.Model):
                         vals['session_round_ids'].append(
                             (0, 0, {'session_date': calc_dates, 'hours': vals['session_hours'],
                                     'sequence': 'Sect-' + str(session_number),
-                                    'instructor_se': vals['instructor_id'],
+                                    'session_instructor_id': vals['instructor_id'],
                                     'from_time_se': vals['from_time'],
                                     'to_time_se': vals['to_time']}))
                         vals['end_date'] = calc_dates
