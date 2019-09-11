@@ -37,7 +37,6 @@
                                 <field name="instructor_id" options="{'no_create': True, 'no_create_edit':True}"/>
                                 <field name="session_hours" widget="float_time"/>
                                 <field name="sessions_count"/>
-                                <field name="state"/>
                             </group>
                             <group>
                                 <field name="round_days"/>
