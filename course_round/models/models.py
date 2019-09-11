@@ -159,7 +159,7 @@ class Round(models.Model):
     @api.model
     def create(self, vals):
         # method to create a sequence for round and also create sessions corresponding to course hours and session hours
-        vals['sequence'] = self.env['ir.sequence'].next_by_code('ems.course.round')
+        vals['name'] = self.env['ir.sequence'].next_by_code('ems.course.round')
         vals['session_round_ids'] = []
         i = vals['sessions_count']
         x = 1
