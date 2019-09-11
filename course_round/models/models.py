@@ -113,6 +113,26 @@ class Round(models.Model):
             'value': {'course_hours': self.course_id.default_hours},
         }
 
+    @api.one
+    def check_tentative(self):
+        self.state = 'tentative'
+
+    @api.one
+    def check_confirm(self):
+        self.state = 'confirm'
+
+    @api.one
+    def check_start(self):
+        self.state = 'start'
+
+    @api.one
+    def check_done(self):
+        self.state = 'done'
+
+    @api.one
+    def check_cancel(self):
+        self.state = 'cancel'
+
     _sql_constraints = [
         ('check_count', 'check(sessions_count > 0)', 'sessions count should be MORE THAN ZERO'),
     ]
