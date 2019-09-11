@@ -163,8 +163,7 @@ class Round(models.Model):
         vals['session_round_ids'] = []
         i = vals['sessions_count']
         x = 1
-        _calc_date = datetime.datetime.strptime(vals['start_date'], '%Y-%m-%d')
-        calc_date = _calc_date.date()
+        calc_date = fields.Date.to_date(vals['start_date'])
         calc_dates = calc_date
         session_number = 1
         count_method = 0
