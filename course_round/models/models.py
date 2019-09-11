@@ -5,10 +5,10 @@ from odoo.exceptions import ValidationError
 
 class Round(models.Model):
     _name = 'ems.course.round'
-    _rec_name = 'sequence'
+    _rec_name = 'name'
     _description = 'Describe Course Rounds'
 
-    sequence = fields.Char(string="ID", required=False, default='New', readonly=True)
+    name = fields.Char(string="ID", required=False, default='New', readonly=True)
     course_id = fields.Many2one(comodel_name="ems.course", string="Course ID", required=True, )
     branch_id = fields.Many2one(comodel_name="ems.branch", string="Branch Location", required=True, )
     lab_id = fields.Many2one(comodel_name="ems.branch.labs", string="Lab", required=False, )
