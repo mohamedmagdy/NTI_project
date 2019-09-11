@@ -58,6 +58,52 @@
             </field>
         </record>
 
+        <record id="view_course_round_kanban" model="ir.ui.view">
+            <field name="name">view.course.round.kanban</field>
+            <field name="model">ems.course.round</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state" class="o_kanban_mobile">
+                <field name="state" options='{"group_by_tooltip": {"description": "Stage Description", "legend_priority": "Use of stars"}}'/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <field name="name"/>
+                                    <span style="float:right;"><span style="color:black; font-weight:bolder;"><field name="course_type"/></span> : <field name="course_id"/></span>
+                                </div>
+                                <div>
+                                    <span style="color:black; font-weight:bolder;">Instructor :</span><field name="instructor_id"/>
+                                    <span style="float:right;"><span style="color:black; font-weight:bolder;">Lab :</span><field name="lab_id"/></span>
+                                </div>
+                                <div style="text-align:center; margin:5px;">
+                                    <span style="color:black; font-weight:bolder;">Days :</span><field name="round_days"/>
+                                </div>
+                                <div>
+                                    <span style="color:black; font-weight:bolder;">From :</span><field name="start_date"/>
+                                    <span style="float:right;"><span style="color:black; font-weight:bolder;">To :</span><field name="end_date"/></span>
+                                </div>
+                                <div style="text-align:center;">
+                                    <field name="from_time"/><span style="color:black; font-weight:bolder;"> > </span><field name="to_time"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_course_round_search" model="ir.ui.view">
+           <field name="name">view.course.round.search</field>
+           <field name="model">ems.course.round</field>
+            <field name="arch" type="xml">
+                <search string="course round search">
+                    <group expand="1" string="Group by">
+                        <filter name="group_by_status" context="{'group_by': 'state'}" string="Status"/>
+                    </group>
+                </search>
+           </field>
+        </record>
+
         <record id="view_course_round_tree" model="ir.ui.view">
             <field name="name">view.course.round.tree</field>
             <field name="model">ems.course.round</field>
