@@ -7,6 +7,10 @@
             <field name="model">ems.course.round</field>
             <field name="arch" type="xml">
                 <form string="">
+                    <header>
+                        <field name='state' widget='statusbar' options="{'clickable': '1', 'fold_field': 'fold'}"
+                               statusbar_visible="tentative,confirm,start,done,cancel"/>
+                    </header>
                     <sheet>
                         <div class="oe_title">
                             <label for="" class="oe_edit_only"/>
