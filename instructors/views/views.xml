@@ -30,6 +30,7 @@
 
                             </group>
                             <group>
+                                <field name="currency_id"/>
                                 <field name="hour_price"/>
                                 <field name="working_hours"/>
                                 <field name="allowed_branches_ids" widget="many2many_tags"
