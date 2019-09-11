@@ -173,7 +173,8 @@
             </field>
         </record>
 
-        <menuitem id="menu_course_round_view" parent="base_ems.menu_ems_root" name="Rounds" action="action_course_round_view" sequence="1"/>
+        <menuitem id="menu_course_round_view" parent="base_ems.menu_ems_root" name="Rounds"
+                  action="action_course_round_view" sequence="1"/>
 
     </data>
 </odoo>
