@@ -109,7 +109,7 @@
             <field name="model">ems.course.round</field>
             <field name="arch" type="xml">
                 <tree string="">
-                    <field name="sequence"/>
+                    <field name="name"/>
                     <field name="course_id"/>
                     <field name="branch_id"/>
                     <field name="round_types_id"/>
