@@ -46,7 +46,8 @@ class Instructor(models.Model):
     address = fields.Char(string="Address", required=False, )
     allowed_courses_ids = fields.Many2many(comodel_name="ems.course", relation="instructor_course_rel",
                                            column1="instructor_id", column2="course_id", string="Allowed courses", )
-    hour_price = fields.Float(string="Hour price", required=False, )
+    currency_id = fields.Many2one(comodel_name="res.currency", string="Currency", required=False, )
+    hour_price = fields.Monetary(string="Hour price", currency_field="currency_id", )
     working_hours = fields.Float(string="Working hours per month", required=False, )
     allowed_branches_ids = fields.Many2many(comodel_name="ems.branch", relation="instructor_branch_rel",
                                             column1="instructor_id", column2="branch_id", string="Allowed Branches",
