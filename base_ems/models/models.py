@@ -10,7 +10,6 @@ class Course(models.Model):
 
     name = fields.Char(string="Course Name", required=True, )
     default_hours = fields.Integer(string="Default Hours", required=True, )
-    sequence = fields.Char(string="ID", required=False, )
     log = fields.Html(string="Log", )
     is_package = fields.Boolean(string="Package", )
     child_ids = fields.One2many(comodel_name="ems.course", inverse_name="parent_id", string="Child Courses",
