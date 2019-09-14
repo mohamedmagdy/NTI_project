@@ -139,7 +139,7 @@
                         </group>
                         <notebook>
                             <page string="Child Courses" attrs="{'invisible':[('is_package', '=', False)]}" options="{'no_create': True, 'no_create_edit':True}">
-                                <field name="child_ids">
+                                <field name="child_ids" options="{'no_create': True, 'no_create_edit':True}">
                                     <tree editable="bottom">
                                         <field name="name"/>
                                     </tree>
