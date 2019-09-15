@@ -29,16 +29,24 @@ class Round(models.Model):
     from_time = fields.Float(string='Time From', required=True, )
     to_time = fields.Float(string='Until', required=True, )
     state = fields.Selection(string="Status",
-                             selection=[('draft', 'Draft'), ('confirm', 'Confirmed'), ('start', 'Started'),
-                                        ('done', 'Done'), ('cancel', 'Canceled')], required=False, )
+                             selection=[('tentative', 'Tentative'), ('confirm', 'Confirmed'), ('start', 'Started'),
+                                        ('done', 'Done'), ('cancel', 'Canceled')], required=True, default="tentative", )
     instructor_id = fields.Many2one(comodel_name="ems.course.instructor", string="Instructor", )
-    ref = fields.Reference(string="Reference", selection=[('ems.course', 'Course'),
-                                                          ('res.partner', 'Package')])
+    course_type = fields.Selection(string="Course Type", selection=[('Course', 'Course'), ('Package', 'Package'), ],
+                                   required=True, default="Course", )
     session_round_ids = fields.One2many(comodel_name="ems.course.session", inverse_name="round_id",
                                         string="Session", required=False, )
     sessions_count = fields.Integer(string="Session Count", required=False, )
     day_off_id = fields.Many2one(comodel_name="ems.days.off", string="", required=False, )
     week_day = fields.Integer(string="Start Day", required=False, )
+    sub_course_ids = fields.Many2many(comodel_name="ems.course", relation="round_sub_course_rel", column1="round_id",
+                                     column2="sub_course_id", string="Sub Courses", )
+
+    @api.onchange('course_id')
+    def _onchange_course_id(self):
+        return {
+            'value': {'sub_course_ids': self.course_id.child_ids},
+        }
 
     # TODO: log interface
 
@@ -75,11 +83,61 @@ class Round(models.Model):
         }
 
     @api.onchange('course_id')
+    def _lab_by_course_id(self):
+        # method to show only instructors related to a specific course
+        if self.course_type == 'Course':
+            return {
+                'domain': {'instructor_id': [('allowed_courses_ids', '=', self.course_id.id)]},
+            }
+
+    @api.onchange('sub_course_ids')
+    def _lab_by_sub_course_ids(self):
+        # method to show only instructors related to a specific course
+        courses = []
+        if self.course_type == 'Package':
+            for course in self.sub_course_ids:
+                courses.append(course.id)
+            return {
+                'domain': {'instructor_id': [('allowed_courses_ids', '=', courses)]},
+            }
+
+    @api.onchange('course_type')
+    def _lab_by_course_type(self):
+        if self.course_type == 'Course':
+            return {
+                'domain': {'course_id': [('is_package', '=', False)]},
+            }
+        else:
+            return {
+                'domain': {'course_id': [('is_package', '=', True)]},
+            }
+
+    @api.onchange('course_id')
     def _get_course_hours(self):
         # method to get the default hours per course
         return {
             'value': {'course_hours': self.course_id.default_hours},
         }
+
+    @api.one
+    def check_tentative(self):
+        self.state = 'tentative'
+
+    @api.one
+    def check_confirm(self):
+        self.state = 'confirm'
+
+    @api.one
+    def check_start(self):
+        self.state = 'start'
+
+    @api.one
+    def check_done(self):
+        self.state = 'done'
+
+    @api.one
+    def check_cancel(self):
+        self.state = 'cancel'
 
     _sql_constraints = [
         ('check_count', 'check(sessions_count > 0)', 'sessions count should be MORE THAN ZERO'),
@@ -111,8 +169,7 @@ class Round(models.Model):
         vals['session_round_ids'] = []
         i = vals['sessions_count']
         x = 1
-        _calc_date = datetime.datetime.strptime(vals['start_date'], '%Y-%m-%d')
-        calc_date = _calc_date.date()
+        calc_date = fields.Date.to_date(vals['start_date'])
         calc_dates = calc_date
         session_number = 1
         count_method = 0
@@ -152,6 +209,13 @@ class Round(models.Model):
             x = x + 1
         return super(Round, self).create(vals)
 
+    @api.multi
+    def name_get(self):
+        result = []
+        for rec in self:
+            result.append((rec.id, "%s/ %s: %s" % (rec.name, rec.course_type, rec.course_id.name)))
+        return result
+
 
 class Session(models.Model):
     _name = 'ems.course.session'
@@ -165,3 +229,9 @@ class Session(models.Model):
     hours = fields.Integer(string="Hours", required=False, )
     from_time_se = fields.Float(string='From', required=True, )
     to_time_se = fields.Float(string='To', required=True, )
+    next_session = fields.Char(string="Next", required=False, )
+
+    @api.model
+    def cron_next_session(self):
+        today = fields.Date.to_date(datetime.date.today())
+        print(today)
