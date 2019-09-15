@@ -40,10 +40,29 @@ class Round(models.Model):
     day_off_id = fields.Many2one(comodel_name="ems.days.off", string="", required=False, )
     week_day = fields.Integer(string="Start Day", required=False, )
     sub_course_ids = fields.Many2many(comodel_name="ems.course", relation="round_sub_course_rel", column1="round_id",
-                                     column2="sub_course_id", string="Sub Courses", )
+                                      column2="sub_course_id", string="Sub Courses", )
+    # next_session = fields.Selection(string="Next", selection=[('today', 'today'), ('after', 'after'), ], default='after', required=True, )
+
+    # @api.model
+    # def cron_next_session(self):
+    #     today = fields.Date.to_date(datetime.date.today())
+    #     print(today)
+    #     sessions = self.env['ems.course.session'].search_read(domain=[], fields=['round_name', 'session_date'])
+    #     print(sessions)
+    #     for session in sessions:
+    #         for rounds in session['round_name']:
+    #             print(rounds)
+                # for dates in session['session_date']:
+                #     print(dates)
+            # print(session['session_date'])
+            # if session['session_date'] == today:
+            #     print("today")
+            #     break
 
     @api.onchange('course_id')
+    #method to show only instructors allocated for a spacific course
     def _onchange_course_id(self):
+        self.instructor_id = 0
         return {
             'value': {'sub_course_ids': self.course_id.child_ids},
         }
@@ -51,13 +70,13 @@ class Round(models.Model):
     # TODO: log interface
 
     @api.onchange('session_hours', 'course_hours')
+    # method to calculate number of sessions
     def _onchange_session_count(self):
-        # method to calculate number of sessions
         self.sessions_count = self.course_hours / self.session_hours
 
     @api.onchange('sessions_count', 'start_date', 'round_days')
+    # method to calculate end date
     def _onchange_end_date(self):
-        # method to calculate end date
         if self.round_days in ['Saturday-tue', 'Sunday', 'Monday']:
             count_method = (self.sessions_count - 1) * 3.5
             self.end_date = self.start_date + datetime.timedelta(days=count_method)
@@ -66,33 +85,34 @@ class Round(models.Model):
             self.end_date = self.start_date + datetime.timedelta(days=count_method)
 
     @api.onchange('session_hours', 'from_time')
+    # method to calculate session end time
     def _onchange_to_time(self):
-        # method to calculate session end time
         self.to_time = self.from_time + self.session_hours
 
     @api.onchange('start_date', 'week_day')
+    # method to get what day is it in start date
     def _get_week_day(self):
-        # method to get what day is it in start date
         self.week_day = self.start_date.weekday()
 
     @api.onchange('branch_id')
+    # method to show only labs related to a specific branch
     def _lab_by_branch_id(self):
-        # method to show only labs related to a specific branch
+        self.lab_id = 0
         return {
             'domain': {'lab_id': [('branch_id', '=', self.branch_id.id)]},
         }
 
     @api.onchange('course_id')
+    # method to show only instructors related to a specific course
     def _lab_by_course_id(self):
-        # method to show only instructors related to a specific course
         if self.course_type == 'Course':
             return {
                 'domain': {'instructor_id': [('allowed_courses_ids', '=', self.course_id.id)]},
             }
 
     @api.onchange('sub_course_ids')
+    # method to show only instructors related to a specific course
     def _lab_by_sub_course_ids(self):
-        # method to show only instructors related to a specific course
         courses = []
         if self.course_type == 'Package':
             for course in self.sub_course_ids:
@@ -102,7 +122,9 @@ class Round(models.Model):
             }
 
     @api.onchange('course_type')
-    def _lab_by_course_type(self):
+    # method to show courses only or packages only
+    def check_package(self):
+        self.course_id = 0
         if self.course_type == 'Course':
             return {
                 'domain': {'course_id': [('is_package', '=', False)]},
@@ -113,8 +135,8 @@ class Round(models.Model):
             }
 
     @api.onchange('course_id')
+    # method to get the default hours per course
     def _get_course_hours(self):
-        # method to get the default hours per course
         return {
             'value': {'course_hours': self.course_id.default_hours},
         }
@@ -202,7 +224,8 @@ class Round(models.Model):
                                     'sequence': 'Sect-' + str(session_number),
                                     'session_instructor_id': vals['instructor_id'],
                                     'from_time_se': vals['from_time'],
-                                    'to_time_se': vals['to_time']}))
+                                    'to_time_se': vals['to_time'],
+                                    'round_name': vals['name']}))
                         vals['end_date'] = calc_dates
                         calc_dates = calc_date + datetime.timedelta(days=count_method)
                         session_number = session_number + 1
@@ -229,9 +252,4 @@ class Session(models.Model):
     hours = fields.Integer(string="Hours", required=False, )
     from_time_se = fields.Float(string='From', required=True, )
     to_time_se = fields.Float(string='To', required=True, )
-    next_session = fields.Char(string="Next", required=False, )
-
-    @api.model
-    def cron_next_session(self):
-        today = fields.Date.to_date(datetime.date.today())
-        print(today)
+    round_name = fields.Char(string="Round Name", required=True, default="RND", )

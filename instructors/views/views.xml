@@ -1,16 +1,19 @@
 <odoo>
     <data>
 
+
         <record id="view_instructor_form" model="ir.ui.view">
             <field name="name">ems instructor</field>
             <field name="model">ems.course.instructor</field>
             <field name="arch" type="xml">
                 <form string="Instructor">
                     <sheet>
+
                         <div class="oe_title">
                             <label for="" class="oe_edit_only"/>
                             <h1>
                                 <field name="sequence" readonly="1"/>
+
                             </h1>
                         </div>
                         <div class="oe_title">
@@ -23,18 +26,110 @@
                             <group>
                                 <field name="age"/>
                                 <field name="address"/>
+                                <field name="allowed_courses_ids" widget="many2many_tags"/>
+
                             </group>
                             <group>
+                                <field name="currency_id"/>
                                 <field name="hour_price"/>
                                 <field name="working_hours"/>
                                 <field name="allowed_branches_ids" widget="many2many_tags"
                                        options="{'no_create':True,'no_open':True}"/>
                             </group>
                         </group>
+<!--                        <notebook>-->
+<!--                            <page string="Free Hours">-->
+<!--                                <group>-->
+<!--                                    <field name="month"/>-->
+<!--                                    <field name="no_of_session_date"/>-->
+<!--                                </group>-->
+<!--                            </page>-->
+<!--                        </notebook>-->
                     </sheet>
                 </form>
             </field>
         </record>
+
+<!--        <record id="view_courses_instructor_allocation_form" model="ir.ui.view">-->
+<!--            <field name="name">Instructor Allocation Form</field>-->
+<!--            <field name="model">ems.courses.instructors.allocation</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="">-->
+<!--                    <sheet>-->
+<!--                        <div class="oe_title">-->
+<!--                            <label for="" class="oe_edit_only"/>-->
+<!--                            <h1>-->
+<!--                                <field name="sequence" readonly="1"/>-->
+<!--                            </h1>-->
+<!--                        </div>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="instructor"/>-->
+<!--                                <field name="round_id" widget="many2many_tags"/>-->
+<!--                                <field name="course_id" />-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                                <field name="date_time_from"/>-->
+<!--                                <field name="date_time_to"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="view_instructor_availability_form" model="ir.ui.view">-->
+<!--            <field name="name">Instructor Availability</field>-->
+<!--            <field name="model">instructor.availability</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <form string="">-->
+<!--                    <sheet>-->
+<!--                        <group>-->
+<!--                            <group>-->
+<!--                                <field name="instructor_name_ids">-->
+<!--                                    <tree>-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="working_hours"/>-->
+<!--                                    </tree>-->
+<!--                                </field>-->
+
+<!--                                <field name="course_ids" widget="many2many_tags"/>-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                                <field name="start_date"/>-->
+<!--                                <field name="end_date"/>-->
+<!--                                <field name="hour_from"/>-->
+<!--                                <field name="hour_to"/>-->
+<!--                            </group>-->
+<!--                        </group>-->
+<!--                    </sheet>-->
+<!--                </form>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <!--        <record id="view_instructor_availability_tree" model="ir.ui.view">-->
+        <!--            <field name="name">Instructor Availability</field>-->
+        <!--            <field name="model">instructor.availability</field>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <tree string="">-->
+        <!--                    <field name="course_ids"/>-->
+        <!--                </tree>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+
+<!--        <record id="view_courses_instructor_allocation_tree" model="ir.ui.view">-->
+<!--            <field name="name">Instructor Allocation Tree</field>-->
+<!--            <field name="model">ems.courses.instructors.allocation</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <tree string="">-->
+<!--                    <field name="sequence"/>-->
+<!--                    <field name="round_id"/>-->
+<!--                    <field name="date_time_from"/>-->
+<!--                    <field name="date_time_to"/>-->
+<!--                </tree>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <record id="view_instructor_tree" model="ir.ui.view">
             <field name="name">ems instructor</field>
@@ -63,10 +158,47 @@
                 </p>
             </field>
         </record>
+<!--        <record id="action_courses_instructors_allocation_view" model="ir.actions.act_window">-->
+<!--            <field name="name">courses instructors allocation</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">ems.courses.instructors.allocation</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="oe_view_nocontent_create">-->
+<!--                    &lt;!&ndash; Add Text Here &ndash;&gt;-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    &lt;!&ndash; More details about what a user can do with his object will be OK &ndash;&gt;-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
+
+<!--        <record id="view_instructor_availability_action" model="ir.actions.act_window">-->
+<!--            <field name="name">Instructor Availability</field>-->
+<!--            <field name="type">ir.actions.act_window</field>-->
+<!--            <field name="res_model">instructor.availability</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="help" type="html">-->
+<!--                <p class="oe_view_nocontent_create">-->
+<!--                    &lt;!&ndash; Add Text Here &ndash;&gt;-->
+<!--                </p>-->
+<!--                <p>-->
+<!--                    &lt;!&ndash; More details about what a user can do with this object will be OK &ndash;&gt;-->
+<!--                </p>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
         <!-- This Menu Item must have a parent and an action -->
         <menuitem id="menuitem_action_instructor" name="Instructors" parent="base_ems.menu_ems_root"
                   action="action_instructor_view" sequence="1"/>
+        <!-- This Menu Item must have a parent and an action -->
+<!--        <menuitem id="menuitem_courses_instructors_allocation_categ" name="Round allocation"-->
+<!--                  parent="base_ems.menu_ems_root" action="action_courses_instructors_allocation_view" sequence="3"/>-->
+        <!-- This Menu Item must have a parent and an action -->
+<!--        <menuitem id="menuitem_instructor_availability_action" name="avaliability" parent="base_ems.menu_ems_root"-->
+<!--                  action="view_instructor_availability_action" sequence="6"/>-->
+
+
     </data>
 </odoo>

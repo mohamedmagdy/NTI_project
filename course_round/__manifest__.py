@@ -25,7 +25,7 @@
     # always loaded
     'data': [
         'views/data.xml',
-        'views/corn.xml',
+        'views/cron.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
