@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <form string="">
                     <header>
+                        <button name="create_sessions" states="tentative" class="oe_highlight" type="object" string="Create Sessions"/>
                         <field name='state' widget='statusbar' options="{'clickable': '1', 'fold_field': 'fold'}"
                                statusbar_visible="tentative,confirm,start,done,cancel"/>
                     </header>
