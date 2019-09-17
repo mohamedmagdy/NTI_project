@@ -131,7 +131,6 @@
                         </div>
                         <group>
                             <group>
-                                <field name="sequence"/>
                                 <field name="is_package"/>
                             </group>
                             <group>
@@ -161,7 +160,6 @@
             <field name="model">ems.course</field>
             <field name="arch" type="xml">
                 <tree string="EMS Course Tree">
-                    <field name="sequence"/>
                     <field name="name"/>
                 </tree>
             </field>
