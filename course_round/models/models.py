@@ -11,7 +11,8 @@ class Round(models.Model):
     name = fields.Char(string="ID", required=False, default='New', readonly=True)
     course_id = fields.Many2one(comodel_name="ems.course", string="Course ID", required=True, )
     branch_id = fields.Many2one(comodel_name="ems.branch", string="Branch Location", required=True, )
-    lab_id = fields.Many2one(comodel_name="ems.branch.labs", string="Lab", required=False, )
+    lab_id = fields.Many2one(comodel_name="ems.branch.labs", string="Lab", required=False,
+                             domain="[('branch_id', '=', branch_id)]", )
     round_types_id = fields.Many2one(comodel_name="ems.round.types", string="Round Type", required=True, )
     reservation_type_ids = fields.Many2many(comodel_name="ems.reservation.types",
                                             relation="round__reservation_type_rel",
