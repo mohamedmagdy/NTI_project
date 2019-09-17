@@ -268,3 +268,4 @@ class Session(models.Model):
     hours = fields.Integer(string="Hours", required=False, )
     from_time_se = fields.Float(string='From', required=True, )
     to_time_se = fields.Float(string='To', required=True, )
+    round_name = fields.Char(string="Round Name", required=True, default="RND", )
