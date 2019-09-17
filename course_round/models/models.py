@@ -112,11 +112,23 @@ class Round(models.Model):
         self.lab_id = 0
 
     @api.onchange('course_id')
+    # method to show only instructors related to a specific course
     def _lab_by_course_id(self):
-        # method to show only instructors related to a specific course
-        return {
-            'domain': {'instructor_id': [('allowed_courses_ids', '=', self.course_id.id)]},
-        }
+        if self.course_type == 'Course':
+            return {
+                'domain': {'instructor_id': [('allowed_courses_ids', '=', self.course_id.id)]},
+            }
+
+    @api.onchange('sub_course_ids')
+    # method to show only instructors related to a specific course
+    def _lab_by_sub_course_ids(self):
+        courses = []
+        if self.course_type == 'Package':
+            for course in self.sub_course_ids:
+                courses.append(course.id)
+            return {
+                'domain': {'instructor_id': [('allowed_courses_ids', '=', courses)]},
+            }
 
     @api.onchange('course_type')
     def _lab_by_course_type(self):
