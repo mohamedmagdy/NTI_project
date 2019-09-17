@@ -42,23 +42,19 @@ class Round(models.Model):
     week_day = fields.Integer(string="Start Day", required=False, )
     sub_course_ids = fields.Many2many(comodel_name="ems.course", relation="round_sub_course_rel", column1="round_id",
                                       column2="sub_course_id", string="Sub Courses", )
-    # next_session = fields.Selection(string="Next", selection=[('today', 'today'), ('after', 'after'), ], default='after', required=True, )
+    is_package = fields.Boolean(string="is package", default= False, )
+    next_session = fields.Char(string="Next Session", compute='compute_next_session', )
 
-    # @api.model
-    # def cron_next_session(self):
-    #     today = fields.Date.to_date(datetime.date.today())
-    #     print(today)
-    #     sessions = self.env['ems.course.session'].search_read(domain=[], fields=['round_name', 'session_date'])
-    #     print(sessions)
-    #     for session in sessions:
-    #         for rounds in session['round_name']:
-    #             print(rounds)
-                # for dates in session['session_date']:
-                #     print(dates)
-            # print(session['session_date'])
-            # if session['session_date'] == today:
-            #     print("today")
-            #     break
+    @api.depends('name')
+    def compute_next_session(self):
+        for rec in self:
+            today = fields.Date.to_date(datetime.date.today())
+            sessions = rec.env['ems.course.session'].search_read(domain=[('round_id', '=', rec.id), ('session_date', '>=', fields.Date.today())], fields=['session_date'], limit=1, order='session_date ASC')
+            for session in sessions:
+                if session['session_date'] == today:
+                    rec.next_session = "Today"
+                else:
+                    rec.next_session = session['session_date']
 
     @api.onchange('course_id')
     #method to show only instructors allocated for a spacific course
@@ -122,15 +118,10 @@ class Round(models.Model):
     @api.onchange('course_type')
     # method to show courses only or packages only
     def check_package(self):
-        self.course_id = 0
         if self.course_type == 'Course':
-            return {
-                'domain': {'course_id': [('is_package', '=', False)]},
-            }
+            self.is_package = False
         else:
-            return {
-                'domain': {'course_id': [('is_package', '=', True)]},
-            }
+            self.is_package = True
 
     @api.onchange('course_id')
     # method to get the default hours per course
