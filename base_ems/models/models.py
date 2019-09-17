@@ -32,7 +32,6 @@ class Branch(models.Model):
     _rec_name = 'name'
     _description = 'EMS Branch'
 
-    sequence = fields.Char(string="ID", required=False, )
     name = fields.Char(string="Branch Name", required=True, )
     address = fields.Text(string="Address", required=False, )
 

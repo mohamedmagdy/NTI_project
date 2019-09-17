@@ -197,7 +197,6 @@
                         </div>
                         <group>
                             <group>
-                                <field name="sequence"/>
                                 <field name="address"/>
                             </group>
                         </group>
