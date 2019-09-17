@@ -194,25 +194,32 @@ class Round(models.Model):
                 raise ValidationError('Start Date Should be Saturday or Tuesday')
 
     @api.model
-    def create(self, vals):
-        # method to create a sequence for round and also create sessions corresponding to course hours and session hours
-        vals['name'] = self.env['ir.sequence'].next_by_code('ems.course.round')
+    def create(self, val):
+        # method to create a sequence
+        val['name'] = self.env['ir.sequence'].next_by_code('ems.course.round')
+        return super(Round, self).create(val)
+
+    @api.multi
+    def create_sessions(self, vals):
+        # create sessions corresponding to course hours and session hours
         vals['session_round_ids'] = []
-        i = vals['sessions_count']
+        i = self.sessions_count
         x = 1
-        calc_date = fields.Date.to_date(vals['start_date'])
+        calc_date = fields.Date.to_date(self.start_date)
         calc_dates = calc_date
         session_number = 1
         count_method = 0
         days_off = self.env['ems.days.off'].search_read(domain=[], fields=['start_date', 'end_date'])
+        if len(self.session_round_ids) > 0:
+            vals['session_round_ids'].append((5, 0, 0))
         while x <= i:
             o = 0
-            if vals['round_days'] in ['Saturday-tue', 'Sunday', 'Monday']:
+            if self.round_days in ['Saturday-tue', 'Sunday', 'Monday']:
                 # to append sessions when there is 2 sessions per week
-                if vals['week_day'] in [5, 6, 0]:
+                if self.week_day in [5, 6, 0]:
                     # to append sessions when start_date = [Saturday or Sunday or Monday]
                     count_method = (x * 3.5)
-                elif vals['week_day'] in [1, 2, 3]:
+                elif self.week_day in [1, 2, 3]:
                     # to append sessions when start_date = [Tuesday or Wednesday or Thursday]
                     if x % 2 == 0:
                         count_method = (x * 3.5)
@@ -229,16 +236,18 @@ class Round(models.Model):
                     o = o + 1
                     if o == len(days_off):
                         vals['session_round_ids'].append(
-                            (0, 0, {'session_date': calc_dates, 'hours': vals['session_hours'],
+                            (0, 0, {'session_date': calc_dates, 'hours': self.session_hours,
                                     'sequence': 'Sect-' + str(session_number),
-                                    'session_instructor_id': vals['instructor_id'],
-                                    'from_time_se': vals['from_time'],
-                                    'to_time_se': vals['to_time']}))
-                        vals['end_date'] = calc_dates
+                                    'session_instructor_id': self.instructor_id.id,
+                                    'from_time_se': self.from_time,
+                                    'to_time_se': self.to_time,
+                                    'round_name': self.name}))
+                        self.end_date = calc_dates
                         calc_dates = calc_date + datetime.timedelta(days=count_method)
                         session_number = session_number + 1
             x = x + 1
-        return super(Round, self).create(vals)
+        return super(Round, self).write(vals)
+
 
 
 class Session(models.Model):
