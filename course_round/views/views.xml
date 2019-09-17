@@ -155,6 +155,7 @@
                     <field name="hours"/>
                     <field name="from_time_se"/>
                     <field name="to_time_se"/>
+                    <field name="round_name"/>
                 </tree>
             </field>
         </record>
