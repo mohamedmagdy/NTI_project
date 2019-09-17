@@ -19,6 +19,13 @@ class Course(models.Model):
         ('check_positive_default_hours', 'check(default_hours > 1)', "Default hours should be greater than 1.",)
     ]
 
+    @api.onchange('child_ids')
+    def _onchange_child_ids(self):
+        y = 0
+        for x in self.child_ids:
+            y = y + x.default_hours
+        self.default_hours = y
+
 
 class Branch(models.Model):
     _name = 'ems.branch'
