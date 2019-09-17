@@ -68,7 +68,7 @@
                 <field name="state" options='{"group_by_tooltip": {"description": "Stage Description", "legend_priority": "Use of stars"}}'/>
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="oe_kanban_card oe_kanban_global_click" style="box-shadow:4px 4px 6px black; margin-bottom:7px; border-radius:7px;">
                                 <div class="oe_kanban_details">
                                     <field name="name"/>
                                     <span style="float:right;"><span style="color:black; font-weight:bolder;"><field name="course_type"/></span> : <field name="course_id"/></span>
