@@ -131,7 +131,9 @@ class Round(models.Model):
             }
 
     @api.onchange('course_type')
-    def _lab_by_course_type(self):
+    # method to show courses only or packages only
+    def check_package(self):
+        self.course_id = 0
         if self.course_type == 'Course':
             return {
                 'domain': {'course_id': [('is_package', '=', False)]},
@@ -142,8 +144,8 @@ class Round(models.Model):
             }
 
     @api.onchange('course_id')
+    # method to get the default hours per course
     def _get_course_hours(self):
-        # method to get the default hours per course
         return {
             'value': {'course_hours': self.course_id.default_hours},
         }
