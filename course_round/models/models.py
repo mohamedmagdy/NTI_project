@@ -82,13 +82,13 @@ class Round(models.Model):
     # TODO: log interface
 
     @api.onchange('session_hours', 'course_hours')
+    # method to calculate number of sessions
     def _onchange_session_count(self):
-        # method to calculate number of sessions
         self.sessions_count = self.course_hours / self.session_hours
 
     @api.onchange('sessions_count', 'start_date', 'round_days')
+    # method to calculate end date
     def _onchange_end_date(self):
-        # method to calculate end date
         if self.round_days in ['Saturday-tue', 'Sunday', 'Monday']:
             count_method = (self.sessions_count - 1) * 3.5
             self.end_date = self.start_date + datetime.timedelta(days=count_method)
@@ -97,21 +97,19 @@ class Round(models.Model):
             self.end_date = self.start_date + datetime.timedelta(days=count_method)
 
     @api.onchange('session_hours', 'from_time')
+    # method to calculate session end time
     def _onchange_to_time(self):
-        # method to calculate session end time
         self.to_time = self.from_time + self.session_hours
 
     @api.onchange('start_date', 'week_day')
+    # method to get what day is it in start date
     def _get_week_day(self):
-        # method to get what day is it in start date
         self.week_day = self.start_date.weekday()
 
     @api.onchange('branch_id')
+    # method to show only labs related to a specific branch
     def _lab_by_branch_id(self):
-        # method to show only labs related to a specific branch
-        return {
-            'domain': {'lab_id': [('branch_id', '=', self.branch_id.id)]},
-        }
+        self.lab_id = 0
 
     @api.onchange('course_id')
     def _lab_by_course_id(self):
