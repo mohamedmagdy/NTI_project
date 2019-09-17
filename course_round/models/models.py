@@ -248,6 +248,12 @@ class Round(models.Model):
             x = x + 1
         return super(Round, self).write(vals)
 
+    @api.multi
+    def name_get(self):
+        result = []
+        for rec in self:
+            result.append((rec.id, "%s/ %s: %s" % (rec.name, rec.course_type, rec.course_id.name)))
+        return result
 
 
 class Session(models.Model):
