@@ -141,8 +141,8 @@
                             <page string="Child Courses" attrs="{'invisible':[('is_package', '=', False)]}" options="{'no_create': True, 'no_create_edit':True}">
                                 <field name="child_ids" options="{'no_create': True, 'no_create_edit':True}">
                                     <tree editable="bottom">
-                                        <field name="sequence"/>
                                         <field name="name"/>
+                                        <field name="default_hours"/>
                                     </tree>
                                 </field>
                             </page>
