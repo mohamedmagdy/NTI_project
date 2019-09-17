@@ -11,7 +11,8 @@ class Round(models.Model):
     name = fields.Char(string="ID", required=False, default='New', readonly=True)
     course_id = fields.Many2one(comodel_name="ems.course", string="Course ID", required=True, )
     branch_id = fields.Many2one(comodel_name="ems.branch", string="Branch Location", required=True, )
-    lab_id = fields.Many2one(comodel_name="ems.branch.labs", string="Lab", required=False, )
+    lab_id = fields.Many2one(comodel_name="ems.branch.labs", string="Lab", required=False,
+                             domain="[('branch_id', '=', branch_id)]", )
     round_types_id = fields.Many2one(comodel_name="ems.round.types", string="Round Type", required=True, )
     reservation_type_ids = fields.Many2many(comodel_name="ems.reservation.types",
                                             relation="round__reservation_type_rel",
@@ -98,9 +99,6 @@ class Round(models.Model):
     # method to show only labs related to a specific branch
     def _lab_by_branch_id(self):
         self.lab_id = 0
-        return {
-            'domain': {'lab_id': [('branch_id', '=', self.branch_id.id)]},
-        }
 
     @api.onchange('course_id')
     # method to show only instructors related to a specific course
@@ -202,13 +200,7 @@ class Round(models.Model):
         count_method = 0
         days_off = self.env['ems.days.off'].search_read(domain=[], fields=['start_date', 'end_date'])
         if len(self.session_round_ids) > 0:
-            vals['session_round_ids'].append(
-                (5, 0, {'session_date': calc_dates, 'hours': self.session_hours,
-                        'sequence': 'Sect-' + str(session_number),
-                        'session_instructor_id': self.instructor_id.id,
-                        'from_time_se': self.from_time,
-                        'to_time_se': self.to_time,
-                        'round_name': self.name}))
+            vals['session_round_ids'].append((5, 0, 0))
         while x <= i:
             o = 0
             if self.round_days in ['Saturday-tue', 'Sunday', 'Monday']:
