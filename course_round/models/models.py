@@ -44,17 +44,6 @@ class Round(models.Model):
                                       column2="sub_course_id", string="Sub Courses", )
     # next_session = fields.Selection(string="Next", selection=[('today', 'today'), ('after', 'after'), ], default='after', required=True, )
 
-    @api.multi
-    def write(self, values):
-        if 'course_id' in values and values.get('course_id'):
-            course_obj = self.env['ems.course'].browse(values.get('course_id'))
-            if course_obj.is_package and course_obj.child_ids:
-                course_ids = [course.id for course in course_obj.child_ids]
-                values['sub_course_ids'] = [(6, 0, course_ids)]
-            else:
-                if self.sub_course_ids:
-                    values['sub_course_ids'] = [(5, None, None)]
-        return super(Round, self).write(values)
     # @api.model
     # def cron_next_session(self):
     #     today = fields.Date.to_date(datetime.date.today())
