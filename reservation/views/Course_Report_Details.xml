@@ -4,50 +4,230 @@
         <template id="course_report_details_id">
             <t t-call="web.html_container">
                 <t t-foreach="docs" t-as="doc">
-                    <t t-call="web.internal_layout">
-                        <div class="page">
-                            <h1 t-if="doc.report_print_counter">Copy
+                    <div class="page">
+                        <div class="header">
+                            <div class="o_background_header">
+                                <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)"
+                                     class="float-left"
+                                     alt="Logo"/>
+                                <div class="float-left company_address">
+                                    <div>
+                                        <strong t-field="res_company.partner_id.name"/>
+                                    </div>
+                                    <span t-field="res_company.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                                </div>
+                                <div class="clearfix mb8"/>
+                            </div>
+                        </div>
+                        <div>
+                            <div style="border:#000 2px solid;width:200px !important;margin-left:40%;text-align:center;">
+                                <h3>Current User</h3>
+                                <span t-field="doc.current_user"></span>
+                            </div>
+                            <h3 t-if="doc.report_print_counter" style="text-align:center;">Copy of IT-Share Invoice
                                 <span>(<t t-esc="doc.report_print_counter"/>)
                                 </span>
-                            </h1>
-                            <h1 t-if="not doc.report_print_counter">Original</h1>
-                            <h2>Course Report</h2>
-                            <h2>Course Name :
-                                <span t-field="doc.select_course_id"/>
-                            </h2>
-                            <h2>Round Name :
-                                <span t-field="doc.select_round_id"/>
-                            </h2>
-                            <h2>Round Type :
-                                <span t-field="doc.select_round_type_id"/>
-                            </h2>
-                            <h2>Student Name :
-                                <span t-field="doc.student_id"/>
-                            </h2>
-                            <h2>Course Reservation Type :
-                                <span t-field="doc.reservation_type"/>
-                            </h2>
-                            <h2>Branch Lab :
-                                <span t-field="doc.branch_lab_id"/>
-                            </h2>
-                            <h2>Round Days :
-                                <span t-field="doc.round_days"/>
-                            </h2>
-                            <h2>Session count :
-                                <span t-field="doc.session_count"/>
-                            </h2>
-                            <h2>Start Date :
-                                <span t-field="doc.start_date"/>
-                            </h2>
-                            <h2>End Date :
-                                <span t-field="doc.end_date"/>
-                            </h2>
-                            <h2>Round Time :
-                                <span t-field="doc.round_time"/>
-                            </h2>
-                            <t t-esc="doc.print_xreport()"/>
+                            </h3>
+                            <h3 t-if="not doc.report_print_counter" style="text-align:center;">Original of IT-Share
+                                Invoice
+                            </h3>
+                            <h1 style="text-align:center;">IT-Share Academy For Courses</h1>
                         </div>
-                    </t>
+
+                        <table class="table table-sm o_main_table" border="2" width="70%" cellpadding="0"
+                               bgcolor="#ededed"
+                               style="padding: 20px; background-color: #ededed; border-collapse:separate;"
+                               align="center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span style="text-align:center;">Student Name</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="docs" t-as="doc">
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.student_id"/>
+                                        </h2>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-sm o_main_table" border="2" width="70%" cellpadding="0"
+                               bgcolor="#ededed"
+                               style="padding: 20px; background-color: #ededed; border-collapse:separate;"
+                               align="center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span style="text-align:center;">Course Name</span>
+                                    </th>
+                                    <th>
+                                        <span style="text-align:center;">Course Reservation Type</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="docs" t-as="doc">
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.select_course_id"/>
+                                        </h2>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.reservation_type"/>
+                                        </h2>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-sm o_main_table" border="2" width="70%" cellpadding="0"
+                               bgcolor="#ededed"
+                               style="padding: 20px; background-color: #ededed; border-collapse:separate;"
+                               align="center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span style="text-align:center;">Branch Lab</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="docs" t-as="doc">
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.branch_lab_id"/>
+                                        </h2>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-sm o_main_table" border="2" width="70%" cellpadding="0"
+                               bgcolor="#ededed"
+                               style="padding: 20px; background-color: #ededed; border-collapse:separate;"
+                               align="center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span style="text-align:center;">Round Name</span>
+                                    </th>
+                                    <th>
+                                        <span style="text-align:center;">Round Type</span>
+                                    </th>
+                                    <th>
+                                        <span style="text-align:center;">Round Days</span>
+                                    </th>
+                                    <th>
+                                        <span style="text-align:center;">Session count</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="docs" t-as="doc">
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.select_round_id"/>
+                                        </h2>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.select_round_type_id"/>
+                                        </h2>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.round_days"/>
+                                        </h2>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.session_count"/>
+                                        </h2>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table class="table table-sm o_main_table" border="2" width="70%" cellpadding="0"
+                               bgcolor="#ededed"
+                               style="padding: 20px; background-color: #ededed; border-collapse:separate;"
+                               align="center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span style="text-align:center;">Round Time</span>
+                                    </th>
+                                    <th>
+                                        <span style="text-align:center;">Start Date</span>
+                                    </th>
+                                    <th>
+                                        <span style="text-align:center;">End Date</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="docs" t-as="doc">
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.round_time"/>
+                                        </h2>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.start_date"/>
+                                        </h2>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        <h2>
+                                            <span t-field="doc.end_date"/>
+                                        </h2>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="footer o_background_footer">
+                            <div class="text-center">
+                                <ul class="list-inline">
+                                    <li t-if="res_company.phone" class="list-inline-item">
+                                        <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/>
+                                        Phone :
+                                        <span t-field="res_company.phone"/>
+                                    </li>
+                                    <li t-if="res_company.email" class="list-inline-item">
+                                        <i class="fa fa-at" role="img" aria-label="Email" title="Email"/>
+                                        Email :
+                                        <span t-field="res_company.email"/>
+                                    </li>
+                                    <li t-if="res_company.website" class="list-inline-item">
+                                        <i class="fa fa-globe" role="img" aria-label="Website" title="Website"/>
+                                        Website :
+                                        <span t-field="res_company.website"/>
+                                    </li>
+                                    <li t-if="res_company.vat" class="list-inline-item">
+                                        <i class="fa fa-building-o" role="img" aria-label="Fiscal number"/>
+                                        <t t-esc="res_company.country_id.vat_label or 'Tax ID'"/>:
+                                        <span t-field="res_company.vat"/>
+                                    </li>
+                                </ul>
+                                <div t-field="res_company.report_footer"/>
+                                <div t-if="report_type == 'pdf'" class="text-muted">
+                                    Page:
+                                    <span class="page"/>
+                                    of
+                                    <span class="topage"/>
+                                </div>
+                            </div>
+                        </div>
+                        <t t-esc="doc.print_xreport()"/>
+                    </div>
                 </t>
             </t>
         </template>
