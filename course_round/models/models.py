@@ -42,7 +42,7 @@ class Round(models.Model):
     week_day = fields.Integer(string="Start Day", required=False, )
     sub_course_ids = fields.Many2many(comodel_name="ems.course", relation="round_sub_course_rel", column1="round_id",
                                       column2="sub_course_id", string="Sub Courses", )
-    # next_session = fields.Selection(string="Next", selection=[('today', 'today'), ('after', 'after'), ], default='after', required=True, )
+    next_session = fields.Char(string="Next Session", compute='compute_next_session', )
 
     # @api.model
     # def cron_next_session(self):
