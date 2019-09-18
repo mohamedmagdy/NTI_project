@@ -214,7 +214,7 @@ class Round(models.Model):
                 if z['start_date'] <= calc_dates <= z['end_date']:
                     calc_dates = calc_date + datetime.timedelta(days=count_method)
                     i = i + 1
-                else:
+                elif session_number <= self.sessions_count:
                     o = o + 1
                     if o == len(days_off):
                         vals['session_round_ids'].append(
