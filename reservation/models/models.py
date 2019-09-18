@@ -10,7 +10,7 @@ class Reservation(models.Model):
     _inherit = 'mail.thread'
 
     # Initialize Database Fields And Initialize Related Fields
-    sequence = fields.Char(string="ID", required=True, track_visibility="onchange", )
+    sequence = fields.Char(string="Reservation Code", required=True, track_visibility="onchange", )
     reservation_type = fields.Selection(string="Reservation Type",
                                         selection=[('schedule', 'Schedule'), ('waiting', 'Waiting List'),
                                                    ('online', 'Online'), ], required=True,
@@ -42,6 +42,7 @@ class Reservation(models.Model):
                                     required=True, track_visibility="onchange", )
     source_of_knowing = fields.Char(string="Source Of Knowing", track_visibility="onchange", )
     report_print_counter = fields.Integer(string="Print Counter", copy=False, )
+    current_user = fields.Many2one('res.users', 'Current User', default=lambda self: self.env.user, track_visibility="onchange")
 
     # Create Sequence Function
     @api.model
