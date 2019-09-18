@@ -8,7 +8,8 @@
             <field name="arch" type="xml">
                 <form string="">
                     <header>
-                        <button name="create_sessions" states="tentative" class="oe_highlight" type="object" string="Create Sessions"/>
+                        <button name="create_sessions" states="tentative" class="oe_highlight" type="object"
+                                string="Create Sessions"/>
                         <field name='state' widget='statusbar' options="{'clickable': '1', 'fold_field': 'fold'}"
                                statusbar_visible="tentative,confirm,start,done,cancel"/>
                     </header>
@@ -95,15 +96,15 @@
         </record>
 
         <record id="view_course_round_search" model="ir.ui.view">
-           <field name="name">view.course.round.search</field>
-           <field name="model">ems.course.round</field>
+            <field name="name">view.course.round.search</field>
+            <field name="model">ems.course.round</field>
             <field name="arch" type="xml">
                 <search string="course round search">
                     <group expand="1" string="Group by">
                         <filter name="group_by_status" context="{'group_by': 'state'}" string="Status"/>
                     </group>
                 </search>
-           </field>
+            </field>
         </record>
 
         <record id="view_course_round_tree" model="ir.ui.view">

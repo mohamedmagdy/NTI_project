@@ -59,7 +59,7 @@ class Round(models.Model):
                     rec.next_session = session['session_date']
 
     @api.onchange('course_id')
-    #method to show only instructors allocated for a spacific course
+    # method to show only instructors allocated for a spacific course
     def _onchange_course_id(self):
         self.instructor_id = 0
         return {
