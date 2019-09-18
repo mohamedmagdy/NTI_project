@@ -184,7 +184,7 @@
         </record>
 
         <menuitem id="menu_ems_course_view" name="Course" parent="menu_ems_root" action="action_ems_course_view"
-                  sequence="1"/>
+                  sequence="5"/>
 
         <record id="view_ems_branch_form" model="ir.ui.view">
             <field name="name">Ems Branches</field>
@@ -323,5 +323,47 @@
 
         <menuitem id="menu_ems_reservation_type_view" name="Reservation Type" parent="menu_ems_configuration_categ"
                   action="action_ems_reservation_types_view" sequence="9"/>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_inherit_student_form" model="ir.ui.view">
+            <field name="name">view.inherit.student.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+
+                <!-- position: after|before|replace|attributes|inside -->
+                <xpath expr="//page[1]" position="inside">
+                    <field name="name"/>
+                    <field name="age"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_student_tree" model="ir.ui.view">
+            <field name="name">view.student.tree</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="name"/>
+                    <field name="age"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_student_view" model="ir.actions.act_window">
+            <field name="name">Student</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+
+              </p><p>
+
+              </p>
+            </field>
+        </record>
+        <menuitem id="menu_student_view" name="Student" parent="menu_ems_root" action="action_student_view" sequence="4"/>
     </data>
 </odoo>

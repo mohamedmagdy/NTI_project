@@ -65,7 +65,7 @@
 
         <!-- This Menu Item Must have a parent -->
         <menuitem id="menu_reservation_reservation_categ" name="Reservation" parent="base_ems.menu_ems_root"
-                  sequence="20" action="view_reservation_reservation_action"/>
+                  sequence="1" action="view_reservation_reservation_action"/>
 
     </data>
 </odoo>

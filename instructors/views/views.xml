@@ -191,7 +191,7 @@
         <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
         <!-- This Menu Item must have a parent and an action -->
         <menuitem id="menuitem_action_instructor" name="Instructors" parent="base_ems.menu_ems_root"
-                  action="action_instructor_view" sequence="1"/>
+                  action="action_instructor_view" sequence="2"/>
         <!-- This Menu Item must have a parent and an action -->
 <!--        <menuitem id="menuitem_courses_instructors_allocation_categ" name="Round allocation"-->
 <!--                  parent="base_ems.menu_ems_root" action="action_courses_instructors_allocation_view" sequence="3"/>-->

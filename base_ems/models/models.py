@@ -45,15 +45,6 @@ class Branch(models.Model):
     address = fields.Text(string="Address", required=False, )
 
 
-class Round(models.Model):
-    _name = 'ems.round.status'
-    _rec_name = 'name'
-    _description = 'EMS Round'
-
-    name = fields.Char(string='Name', required=True)
-    sequence = fields.Char(string='ID', required=False)
-
-
 class RoundType(models.Model):
     _name = 'ems.round.types'
     _rec_name = 'name'
@@ -93,3 +84,11 @@ class EMSBranchLabs(models.Model):
     _sql_constraints = [
         ('check_positive_seats_count', 'check(default_hours > 0)', "Default hours should be greater than 1."),
     ]
+
+
+class Student(models.Model):
+    _name = 'res.partner'
+    _inherit = 'res.partner'
+
+    name = fields.Char(string="Name", required=False, )
+    age = fields.Integer(string="Age", required=False, )

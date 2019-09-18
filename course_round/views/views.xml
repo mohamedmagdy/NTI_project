@@ -10,8 +10,11 @@
                     <header>
                         <button name="create_sessions" states="tentative" class="oe_highlight" type="object"
                                 string="Create Sessions"/>
-                        <field name='state' widget='statusbar' options="{'clickable': '1', 'fold_field': 'fold'}"
-                               statusbar_visible="tentative,confirm,start,done,cancel"/>
+                        <button name="check_confirm" class="oe_highlight" states="tentative" type="object" string="Confirm"/>
+                        <button name="check_start" class="oe_highlight" states="confirm" type="object" string="Start"/>
+                        <button name="check_done" class="oe_highlight" states="start" type="object" string="Done"/>
+                        <button name="check_cancel" class="oe_highlight" states="confirm,start" type="object" string="Cancel"/>
+                        <field name='state' widget='statusbar' statusbar_visible="tentative,confirm,start,done,cancel"/>
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -132,6 +135,8 @@
                 <search string="course round search">
                     <group expand="1" string="Group by">
                         <filter name="group_by_status" context="{'group_by': 'state'}" string="Status"/>
+                        <filter name="group_by_instructor" context="{'group_by': 'instructor_id'}" string="Instructor"/>
+                        <filter name="group_by_course_id" context="{'group_by': 'course_id'}" string="Course" readonly="True"/>
                     </group>
                 </search>
             </field>
@@ -208,7 +213,7 @@
         </record>
 
         <menuitem id="menu_course_round_view" parent="base_ems.menu_ems_root" name="Rounds"
-                  action="action_course_round_view" sequence="1"/>
+                  action="action_course_round_view" sequence="3"/>
 
     </data>
 </odoo>
