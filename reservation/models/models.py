@@ -10,7 +10,7 @@ class Reservation(models.Model):
     _inherit = 'mail.thread'
 
     # Initialize Database Fields And Initialize Related Fields
-    sequence = fields.Char(string="ID", required=True, track_visibility="onchange", )
+    sequence = fields.Char(string="Reservation Code", required=True, track_visibility="onchange", )
     reservation_type = fields.Selection(string="Reservation Type",
                                         selection=[('schedule', 'Schedule'), ('waiting', 'Waiting List'),
                                                    ('online', 'Online'), ], required=True,

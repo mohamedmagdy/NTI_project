@@ -21,10 +21,14 @@
                             </div>
                         </div>
                         <div>
+                            <h1 style="text-align:center;">IT-Share Academy For Courses</h1>
                             <div style="border:#000 2px solid;width:200px !important;margin-left:40%;text-align:center;">
                                 <h3>Current User</h3>
                                 <span t-field="doc.current_user"></span>
                             </div>
+                            <div style="text-align:center;">
+                            <h3>Reservation Code : <span t-field="doc.sequence"/> </h3>
+                                </div>
                             <h3 t-if="doc.report_print_counter" style="text-align:center;">Copy of IT-Share Invoice
                                 <span>(<t t-esc="doc.report_print_counter"/>)
                                 </span>
@@ -32,7 +36,6 @@
                             <h3 t-if="not doc.report_print_counter" style="text-align:center;">Original of IT-Share
                                 Invoice
                             </h3>
-                            <h1 style="text-align:center;">IT-Share Academy For Courses</h1>
                         </div>
 
                         <table class="table table-sm o_main_table" border="2" width="70%" cellpadding="0"
