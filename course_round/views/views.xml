@@ -22,10 +22,12 @@
                         </div>
                         <group>
                             <group>
+                                <field name="is_package" invisible="1"/>
                                 <field name="course_type" widget="radio"/>
-                                <field name="course_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                                <field name="course_id" options="{'no_create': True, 'no_create_edit':True}"
+                                       domain="[('is_package', '=', is_package)]"/>
                                 <field name="sub_course_ids" attrs="{'invisible': [('course_type','=', 'Course')]}"
-                                       widget="many2many_tags" readonly="True"
+                                       widget="many2many_tags"
                                        options="{'no_create': True, 'no_create_edit':True}"/>
                                 <field name="round_types_id" widget="selection"
                                        options="{'no_create': True, 'no_create_edit':True}"/>
@@ -40,6 +42,7 @@
                                 <field name="instructor_id" options="{'no_create': True, 'no_create_edit':True}"/>
                                 <field name="session_hours" widget="float_time"/>
                                 <field name="sessions_count"/>
+                                <field name="next_session" invisible="1"/>
                             </group>
                             <group>
                                 <field name="round_days"/>
@@ -66,27 +69,54 @@
             <field name="model">ems.course.round</field>
             <field name="arch" type="xml">
                 <kanban default_group_by="state" class="o_kanban_mobile">
-                <field name="state" options='{"group_by_tooltip": {"description": "Stage Description", "legend_priority": "Use of stars"}}'/>
+                    <field name="state"
+                           options='{"group_by_tooltip": {"description": "Stage Description", "legend_priority": "Use of stars"}}'/>
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="oe_kanban_card oe_kanban_global_click" style="box-shadow:4px 4px 6px black; margin-bottom:7px; border-radius:7px;">
-                                <div class="oe_kanban_details">
+                            <div class="oe_kanban_card oe_kanban_global_click"
+                                 style="box-shadow:4px 4px 6px black; margin-bottom:7px; border-radius:7px;">
+                                <div class="oe_kanban_details card-header bg-transparent">
                                     <field name="name"/>
-                                    <span style="float:right;"><span style="color:black; font-weight:bolder;"><field name="course_type"/></span> : <field name="course_id"/></span>
+                                    <span style="float:right;">
+                                        <span style="color:black; font-weight:bolder;">
+                                            <field name="course_type"/>
+                                        </span>
+                                        :
+                                        <field name="course_id"/>
+                                    </span>
                                 </div>
-                                <div>
-                                    <span style="color:black; font-weight:bolder;">Instructor :</span><field name="instructor_id"/>
-                                    <span style="float:right;"><span style="color:black; font-weight:bolder;">Lab :</span><field name="lab_id"/></span>
+                                <div class="card-body text-success">
+                                    <div>
+                                        <span style="color:black; font-weight:bolder;">Instructor :</span>
+                                        <field name="instructor_id"/>
+                                        <span style="float:right;">
+                                            <span style="color:black; font-weight:bolder;">Lab :</span>
+                                            <field name="lab_id"/>
+                                        </span>
+                                    </div>
+                                    <div style="text-align:center;">
+                                        <span style="color:black; font-weight:bolder;">Days :</span>
+                                        <field name="round_days"/>
+                                    </div>
                                 </div>
-                                <div style="text-align:center; margin:5px;">
-                                    <span style="color:black; font-weight:bolder;">Days :</span><field name="round_days"/>
-                                </div>
-                                <div>
-                                    <span style="color:black; font-weight:bolder;">From :</span><field name="start_date"/>
-                                    <span style="float:right;"><span style="color:black; font-weight:bolder;">To :</span><field name="end_date"/></span>
-                                </div>
-                                <div style="text-align:center;">
-                                    <field name="from_time"/><span style="color:black; font-weight:bolder;"> > </span><field name="to_time"/>
+                                <div class="card-footer bg-transparent">
+                                    <div>
+                                        <span style="color:black; font-weight:bolder;">From :</span>
+                                        <field name="start_date"/>
+                                        <span style="float:right;">
+                                            <span style="color:black; font-weight:bolder;">To :</span>
+                                            <field name="end_date"/>
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span style="color:black; font-weight:bolder;">Next Session: </span>
+                                        <span style="color:darkred;"><field name="next_session"/></span>
+                                        <div style="float:right;">
+                                            <field name="from_time"/>
+                                            <span style="color:black; font-weight:bolder;">></span>
+                                            <field name="to_time"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </t>
@@ -137,8 +167,8 @@
                             <field name="session_date"/>
                             <field name="session_instructor_id"/>
                             <field name="hours"/>
-                            <field name="from_time_se"/>
-                            <field name="to_time_se"/>
+                            <field name="from_time_se" widget="float_time"/>
+                            <field name="to_time_se" widget="float_time"/>
                         </group>
                     </sheet>
                 </form>
@@ -154,8 +184,8 @@
                     <field name="session_date"/>
                     <field name="session_instructor_id"/>
                     <field name="hours"/>
-                    <field name="from_time_se"/>
-                    <field name="to_time_se"/>
+                    <field name="from_time_se" widget="float_time"/>
+                    <field name="to_time_se" widget="float_time"/>
                     <field name="round_name"/>
                 </tree>
             </field>
