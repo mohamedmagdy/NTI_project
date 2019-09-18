@@ -120,15 +120,10 @@ class Round(models.Model):
     @api.onchange('course_type')
     # method to show courses only or packages only
     def check_package(self):
-        self.course_id = 0
         if self.course_type == 'Course':
-            return {
-                'domain': {'course_id': [('is_package', '=', False)]},
-            }
+            self.is_package = False
         else:
-            return {
-                'domain': {'course_id': [('is_package', '=', True)]},
-            }
+            self.is_package = True
 
     @api.onchange('course_id')
     # method to get the default hours per course
