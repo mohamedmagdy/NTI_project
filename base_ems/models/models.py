@@ -14,10 +14,18 @@ class Course(models.Model):
     is_package = fields.Boolean(string="Package", )
     child_ids = fields.Many2many(comodel_name="ems.course", relation="course_package_rel", column1="course_id",
                                  column2="child_ids", string="Child Courses", domain=[('is_package', '=', False)])
+    type = fields.Selection(string="Type", selection=[('course', 'Course'), ('package', 'Package'), ], required=False, )
 
     _sql_constraints = [
         ('check_positive_default_hours', 'check(default_hours > 1)', "Default hours should be greater than 1.",)
     ]
+
+    @api.onchange('is_package')
+    def type_change(self):
+        if not self.is_package:
+            self.type = 'course'
+        else:
+            self.type = 'package'
 
     @api.onchange('child_ids')
     def _onchange_child_ids(self):
