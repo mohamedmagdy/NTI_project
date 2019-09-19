@@ -332,30 +332,59 @@
             <field name="arch" type="xml">
 
                 <!-- position: after|before|replace|attributes|inside -->
-                <xpath expr="//page[1]" position="inside">
-                    <field name="name"/>
-                    <field name="age"/>
+                <xpath expr="//notebook[@colspan='4']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_company', '=', False)]}</attribute>
                 </xpath>
-
+                <!-- position values: after|before|replace|attributes|inside -->
+                <xpath expr="//sheet/group[1]" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_company', '=', False)]}</attribute>
+                </xpath>
+                <!-- position values: after|before|replace|attributes|inside -->
+                <xpath expr="//sheet/div[1]" position="attributes">
+                    <attribute name="attrs">{'invisible': 1}</attribute>
+                </xpath>
+                <!-- position values: after|before|replace|attributes|inside -->
+                <xpath expr="//sheet/group[1]" position="before">
+                    <group attrs="{'invisible': [('is_company', '=', True)]}">
+                        <group>
+                            <label for="phone" modifiers="{}"/>
+                            <div class="o_row" modifiers="{}">
+                                <field name="mobile" widget="phone"/>
+                            </div>
+                            <label for="email" class="oe_inline" modifiers="{}"/>
+				            <div class="o_row o_row_readonly" modifiers="{}">
+                                <field name="email" widget="mail"/>
+                            </div>
+                        </group>
+                        <group>
+                                <field name="payment"/>
+                        </group>
+                    </group>
+                </xpath>
             </field>
         </record>
 
-        <record id="view_student_tree" model="ir.ui.view">
-            <field name="name">view.student.tree</field>
-            <field name="model">res.partner</field>
-            <field name="arch" type="xml">
-                <tree string="">
-                    <field name="name"/>
-                    <field name="age"/>
-                </tree>
-            </field>
-        </record>
+                <record id="view_student_kanban" model="ir.ui.view">
+                            <field name="name">view.student.kanban</field>
+                            <field name="model">res.partner</field>
+                    <field name="inherit_id" ref="base.view_partner_form"/>
+                            <field name="arch" type="xml">
+                                <kanban>
+                                    <field name="name"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </record>
+
 
         <record id="action_student_view" model="ir.actions.act_window">
             <field name="name">Student</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,form</field>
             <field name="help" type="html">
               <p class="oe_view_nocontent_create">
 

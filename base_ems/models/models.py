@@ -90,5 +90,6 @@ class Student(models.Model):
     _name = 'res.partner'
     _inherit = 'res.partner'
 
-    name = fields.Char(string="Name", required=False, )
-    age = fields.Integer(string="Age", required=False, )
+    payment = fields.Selection(string="Payment Method", selection=[('cash', 'Cash'), ('bank', 'Bank Transfer'), ], required=False, )
+    mobile = fields.Char(string="Mobile", required=False,)
+    mail = fields.Char(string="E-mail", required=False,)
