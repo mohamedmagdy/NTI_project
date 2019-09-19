@@ -202,7 +202,7 @@
 
 
                             <group>
-                                <field name="sequence"/>
+                                <field name="sequence" invisible="1"/>
                                 <field name="address"/>
                             </group>
                         </group>
@@ -347,14 +347,9 @@
                 <xpath expr="//sheet/group[1]" position="before">
                     <group attrs="{'invisible': [('is_company', '=', True)]}">
                         <group>
-                            <label for="phone" modifiers="{}"/>
-                            <div class="o_row" modifiers="{}">
                                 <field name="mobile" widget="phone"/>
-                            </div>
-                            <label for="email" class="oe_inline" modifiers="{}"/>
-				            <div class="o_row o_row_readonly" modifiers="{}">
-                                <field name="email" widget="mail"/>
-                            </div>
+                                <field name="email" widget="mail" context="{'gravatar_image': True}" attrs="{'required': [('user_ids','!=', [])]}"/>
+
                         </group>
                         <group>
                                 <field name="payment"/>
@@ -393,6 +388,6 @@
               </p>
             </field>
         </record>
-        <menuitem id="menu_student_view" name="Student" parent="menu_ems_root" action="action_student_view" sequence="4"/>
+        <menuitem id="menu_student_view" name="Student" parent="menu_ems_root" action="action_student_view" sequence="1"/>
     </data>
 </odoo>

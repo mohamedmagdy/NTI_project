@@ -10,10 +10,12 @@
                     <header>
                         <button name="create_sessions" states="tentative" class="oe_highlight" type="object"
                                 string="Create Sessions"/>
-                        <button name="check_confirm" class="oe_highlight" states="tentative" type="object" string="Confirm"/>
+                        <button name="check_confirm" class="oe_highlight" states="tentative" type="object"
+                                string="Confirm"/>
                         <button name="check_start" class="oe_highlight" states="confirm" type="object" string="Start"/>
                         <button name="check_done" class="oe_highlight" states="start" type="object" string="Done"/>
-                        <button name="check_cancel" class="oe_highlight" states="confirm,start" type="object" string="Cancel"/>
+                        <button name="check_cancel" class="oe_highlight" states="confirm,start" type="object"
+                                string="Cancel"/>
                         <field name='state' widget='statusbar' statusbar_visible="tentative,confirm,start,done,cancel"/>
                     </header>
                     <sheet>
@@ -32,24 +34,25 @@
                                 <field name="sub_course_ids" attrs="{'invisible': [('course_type','=', 'Course')]}"
                                        widget="many2many_tags"
                                        options="{'no_create': True, 'no_create_edit':True}"/>
-                                <field name="round_types_id" widget="selection"
-                                       options="{'no_create': True, 'no_create_edit':True}"/>
+
                             </group>
                             <group>
                                 <field name="branch_id" options="{'no_create': True, 'no_create_edit':True}"/>
                                 <field name="lab_id" options="{'no_create': True, 'no_create_edit':True}"/>
-                                <field name="reservation_type_ids" widget="many2many_tags"
+                                <field name="round_types_id" widget="selection"
                                        options="{'no_create': True, 'no_create_edit':True}"/>
+                                <field name="reservation_type_ids" widget="many2many_tags"
+                                       options="{'no_create': True, 'no_create_edit':True}" invisible="1"/>
                             </group>
                             <group>
                                 <field name="instructor_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                                <field name="course_hours"/>
                                 <field name="session_hours" widget="float_time"/>
                                 <field name="sessions_count"/>
                                 <field name="next_session" invisible="1"/>
                             </group>
                             <group>
                                 <field name="round_days"/>
-                                <field name="course_hours"/>
                                 <field name="start_date"/>
                                 <field name="week_day" invisible="1"/>
                                 <field name="end_date"/>
@@ -112,8 +115,10 @@
                                         </span>
                                     </div>
                                     <div>
-                                        <span style="color:black; font-weight:bolder;">Next Session: </span>
-                                        <span style="color:darkred;"><field name="next_session"/></span>
+                                        <span style="color:black; font-weight:bolder;">Next Session:</span>
+                                        <span style="color:darkred;">
+                                            <field name="next_session"/>
+                                        </span>
                                         <div style="float:right;">
                                             <field name="from_time"/>
                                             <span style="color:black; font-weight:bolder;">></span>
@@ -136,7 +141,8 @@
                     <group expand="1" string="Group by">
                         <filter name="group_by_status" context="{'group_by': 'state'}" string="Status"/>
                         <filter name="group_by_instructor" context="{'group_by': 'instructor_id'}" string="Instructor"/>
-                        <filter name="group_by_course_id" context="{'group_by': 'course_id'}" string="Course" readonly="True"/>
+                        <filter name="group_by_course_id" context="{'group_by': 'course_id'}" string="Course"
+                                readonly="True"/>
                     </group>
                 </search>
             </field>
@@ -185,10 +191,9 @@
             <field name="model">ems.course.session</field>
             <field name="arch" type="xml">
                 <tree string="">
-                    <field name="sequence"/>
+                    <field name="sequence" string="Number"/>
                     <field name="session_date"/>
                     <field name="session_instructor_id"/>
-                    <field name="hours"/>
                     <field name="from_time_se" widget="float_time"/>
                     <field name="to_time_se" widget="float_time"/>
                     <field name="round_name"/>

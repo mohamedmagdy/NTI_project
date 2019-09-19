@@ -9,9 +9,9 @@ class Round(models.Model):
     _description = 'Course Rounds'
 
     name = fields.Char(string="ID", required=False, default='New', readonly=True)
-    course_id = fields.Many2one(comodel_name="ems.course", string="Course ID", required=True, )
+    course_id = fields.Many2one(comodel_name="ems.course", string="Course Name", required=True, )
     branch_id = fields.Many2one(comodel_name="ems.branch", string="Branch Location", required=True, )
-    lab_id = fields.Many2one(comodel_name="ems.branch.labs", string="Lab", required=False,
+    lab_id = fields.Many2one(comodel_name="ems.branch.labs", string="Lab", required=True,
                              domain="[('branch_id', '=', branch_id)]", )
     round_types_id = fields.Many2one(comodel_name="ems.round.types", string="Round Type", required=True, )
     reservation_type_ids = fields.Many2many(comodel_name="ems.reservation.types",
@@ -24,15 +24,15 @@ class Round(models.Model):
                                              ('Sunday', 'Sunday-Wednesday'),
                                              ('Monday', 'Monday-Thursday')], required=True, )
     course_hours = fields.Integer(string="Course Hours", required=True, )
-    session_hours = fields.Float(string="Session Hours", required=False, default="1")
+    session_hours = fields.Float(string="Session Hours", required=True, default="1")
     start_date = fields.Date(string="Start Date", required=True, default=fields.Date.context_today)
     end_date = fields.Date(string="End Date", required=True, )
-    from_time = fields.Float(string='Time From', required=True, )
+    from_time = fields.Float(string='Time From', required=True, default="10")
     to_time = fields.Float(string='Until', required=True, )
     state = fields.Selection(string="Status",
                              selection=[('tentative', 'Tentative'), ('confirm', 'Confirmed'), ('start', 'Started'),
                                         ('done', 'Done'), ('cancel', 'Canceled')], required=True, default="tentative", )
-    instructor_id = fields.Many2one(comodel_name="ems.course.instructor", string="Instructor", )
+    instructor_id = fields.Many2one(comodel_name="ems.course.instructor", string="Instructor", required=True)
     course_type = fields.Selection(string="Course Type", selection=[('Course', 'Course'), ('Package', 'Package'), ],
                                    required=True, default="Course", )
     session_round_ids = fields.One2many(comodel_name="ems.course.session", inverse_name="round_id",
@@ -41,7 +41,7 @@ class Round(models.Model):
     day_off_id = fields.Many2one(comodel_name="ems.days.off", string="", required=False, )
     week_day = fields.Integer(string="Start Day", required=False, )
     sub_course_ids = fields.Many2many(comodel_name="ems.course", relation="round_sub_course_rel", column1="round_id",
-                                      column2="sub_course_id", string="Sub Courses", )
+                                      column2="sub_course_id", string="Sub Courses", readonly=True)
     is_package = fields.Boolean(string="is package", default=False, )
     next_session = fields.Char(string="Next Session", compute='compute_next_session', )
 
@@ -219,7 +219,7 @@ class Round(models.Model):
                     if o == len(days_off):
                         vals['session_round_ids'].append(
                             (0, 0, {'session_date': calc_dates, 'hours': self.session_hours,
-                                    'sequence': 'Sect-' + str(session_number),
+                                    'sequence': 'Sess-' + str(session_number),
                                     'session_instructor_id': self.instructor_id.id,
                                     'from_time_se': self.from_time,
                                     'to_time_se': self.to_time,
